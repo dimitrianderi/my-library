@@ -1,0 +1,28 @@
+@import '@/styles/common/settings.scss';
+@import '@/styles/common/fonts.scss';
+@import '@/styles/common/default.scss';
+@import '@/styles/ui/scroll.scss';
+
+body {
+  color: $white;
+  background: $black;
+  font-family: sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  background: url($main-background) repeat 5% 5%;
+  background-size: contain;
+  object-fit: contain;
+  background-attachment: fixed;
+}
+
+.title {
+  background-color: $brown;
+  text-align: center;
+  color: $gray;
+  font-family: 'Blokgauz';
+  font-size: 18px;
+  padding: 5px 10px;
+}
