@@ -1,7 +1,119 @@
+$dark: #000000;
 $black: #17181c;
 $brown: #461515;
 $cream: #d6cbb5;
-$gray: #d6cbb5;
+$gold: #f0e68c;
+$gray: #808080;
+$input-shadow: #f9f0da;
 $white: #fff;
+$scarlet: #f19ea3;
 
 $main-background: '@/assets/img/background.jpg';
+
+@mixin btn($width: 200px, $radius: 8px, $size: 16px) {
+  width: $width;
+  padding: 5px;
+  border-radius: $radius;
+  font-family: 'Blokgauz';
+  font-size: $size;
+  font-weight: 500;
+  background-color: $brown;
+  color: $dark;
+  text-shadow: 0 0 4px $gold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: 0 0 5px $brown;
+  transition: all 0.5s ease;
+
+  &:active,
+  &:hover,
+  &:focus {
+    color: $gold;
+    text-shadow: 0 0 10px $white;
+  }
+}
+
+@mixin title($color: $cream, $size: 18px, $font: 'Blokgauz') {
+  color: $color;
+  font-family: $font;
+  font-size: $size;
+  width: 100%;
+  text-align: center;
+  background-color: $brown;
+  padding: 5px 10px;
+
+  &:last-of-type {
+    align-self: flex-end;
+    height: 25px;
+  }
+}
+
+@mixin form-control() {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px $input-shadow;
+  border-radius: 8px;
+  padding: 7px;
+  margin-top: 5px;
+  padding-left: 12px;
+}
+
+@mixin label($color: $brown, $size: 17px, $font: 'Blokgauz-italic') {
+  color: $color;
+  font-size: $size;
+  text-align: center;
+  font-family: $font;
+  font-weight: 700;
+  padding-left: 5px;
+}
+
+@mixin input($width: 240px, $height: 32px, $size: 16px, $font: 'Blokgauz') {
+  width: $width;
+  height: $height;
+  padding: 0 20px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  box-shadow: inset 1px 1px 5px 1px $gray;
+  background: $cream;
+  color: $brown;
+  font-family: $font;
+  font-size: $size;
+  transition: 0.3s linear;
+
+  &:hover,
+  &:focus {
+    background: $input-shadow;
+  }
+
+  &.error {
+    background: $scarlet;
+  }
+}
+
+@mixin error($height: 15px, $size: 12px) {
+  display: flex;
+  align-items: center;
+  color: $scarlet;
+  height: $height;
+  font-size: $size;
+  font-weight: 700;
+  align-self: flex-end;
+}
+
+@mixin modal($top: 40%, $left: 50%, $width: 350px) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+  width: $width;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: $cream;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
