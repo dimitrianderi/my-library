@@ -1,5 +1,8 @@
 <template>
-  <h1>Auth</h1>
+    <h1>Авторизация</h1>
+  <form>
+    
+  </form>
 </template>
 
 <script>

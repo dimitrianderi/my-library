@@ -4,12 +4,18 @@ const routes = [
     {
         path: '/',
         name: 'Library',
-        component: () => import('@/views/Library.vue')
+        component: () => import('@/views/Library.vue'),
+        meta: {
+            layout: 'main'
+        }
     },
     {
         path: '/auth',
         name: 'Auth',
-        component: () => import('@/views/Auth.vue')
+        component: () => import('@/views/Auth.vue'),
+        meta: {
+            layout: 'auth'
+        }
     },
 ]
 
