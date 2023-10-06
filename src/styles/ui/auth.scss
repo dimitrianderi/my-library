@@ -1,0 +1,28 @@
+.modal {
+  @include modal;
+}
+
+.title {
+  @include title;
+}
+
+.form-control {
+  @include form-control;
+}
+
+.label {
+  @include label;
+}
+
+.input {
+  @include input;
+}
+
+.errorText {
+  @include errorText;
+  margin-right: 10px;
+}
+
+.btn {
+  @include btn;
+}

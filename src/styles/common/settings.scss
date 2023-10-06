@@ -1,4 +1,5 @@
 $dark: #000000;
+$dark-scarlet: #f65964;
 $black: #17181c;
 $brown: #461515;
 $cream: #d6cbb5;
@@ -10,7 +11,7 @@ $scarlet: #f19ea3;
 
 $main-background: '@/assets/img/background.jpg';
 
-@mixin btn($width: 200px, $radius: 8px, $size: 16px) {
+@mixin btn($width: 200px, $radius: 8px, $size: 16px, $shadow-width: 0) {
   width: $width;
   padding: 5px;
   border-radius: $radius;
@@ -22,7 +23,7 @@ $main-background: '@/assets/img/background.jpg';
   text-shadow: 0 0 4px $gold;
   letter-spacing: 2px;
   cursor: pointer;
-  box-shadow: 0 0 5px $brown;
+  box-shadow: 0 0 $shadow-width $brown;
   transition: all 0.5s ease;
 
   &:active,
@@ -93,10 +94,10 @@ $main-background: '@/assets/img/background.jpg';
   }
 }
 
-@mixin error($height: 15px, $size: 12px) {
+@mixin errorText($height: 15px, $size: 12px) {
   display: flex;
   align-items: center;
-  color: $scarlet;
+  color: $dark-scarlet;
   height: $height;
   font-size: $size;
   font-weight: 700;
