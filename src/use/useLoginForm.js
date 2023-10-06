@@ -2,7 +2,7 @@ import { useField, useForm } from 'vee-validate'
 import { computed, ref, watch } from 'vue'
 import * as yup from 'yup'
 
-export default function useLoginForm() {
+export function useLoginForm() {
     const { handleSubmit, isSubmitting, submitCount } = useForm()
     const MIN_PASS = 6
     const isErrorEmail = ref(false)
@@ -17,7 +17,7 @@ export default function useLoginForm() {
             .required('заполните это поле')
     )
     const { value: pass, errorMessage: errorPass } = useField(
-        'pass',
+        'password',
         yup
             .string()
             .trim()

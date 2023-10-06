@@ -17,19 +17,21 @@
       <input
         :class="['input', { error: errorPass }]"
         type="password"
-        id="pass"
+        id="password"
         v-model="pass"
         autocomplete="off"
       />
     </div>
     <small class="errorText">{{ errorPass }}</small>
-    <button type="submit" class="btn" id="isInBasket" :disabled="isSubmitting">Войти</button>
+    <button type="submit" class="btn" id="isInBasket" :disabled="isSubmitting">
+      Войти
+    </button>
     <h2 class="title"></h2>
   </form>
 </template>
 
 <script>
-import useLoginForm from '@/use/useLoginForm'
+import { useLoginForm } from '@/use/useLoginForm'
 
 export default {
   setup() {
