@@ -1,9 +1,13 @@
 import { useField, useForm } from 'vee-validate'
 import { computed, ref, watch } from 'vue'
 import * as yup from 'yup'
+import { useAuthStore } from '../stores/AuthStore'
+import { useRouter } from 'vue-router'
 
 export function useLoginForm() {
+    const router = useRouter()
     const { handleSubmit, isSubmitting, submitCount } = useForm()
+    const authStore = useAuthStore()
     const MIN_PASS = 6
     const isErrorEmail = ref(false)
     const isErrorPass = ref(false)
@@ -25,8 +29,12 @@ export function useLoginForm() {
             .min(MIN_PASS, `в пароле должно быть минимум ${MIN_PASS} символов`)
     )
 
-    const onSubmit = handleSubmit((values) => {
-        console.log(values)
+    const onSubmit = handleSubmit( async (values) => {
+        try {
+            await authStore.login(values)
+            router.push('/')
+            console.log(2222222222222222)
+        } catch(e) {}
     })
 
     watch(submitCount, (newValue) => {
