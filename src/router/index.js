@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from '@/stores/AuthStore'
 
 const routes = [
     {
@@ -6,7 +7,8 @@ const routes = [
         name: 'Library',
         component: () => import('@/views/Library.vue'),
         meta: {
-            layout: 'main'
+            layout: 'main',
+            auth: true
         }
     },
     {
@@ -14,7 +16,8 @@ const routes = [
         name: 'Auth',
         component: () => import('@/views/Auth.vue'),
         meta: {
-            layout: 'auth'
+            layout: 'auth',
+            auth: false
         }
     },
 ]
@@ -22,8 +25,21 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    linkActiveClass:'active',
+    linkActiveClass: 'active',
     linkExactActiveClass: 'active'
+})
+
+router.beforeEach((to, _, next) => {
+    const authStore = useAuthStore()
+    const mustAuth = to.meta.auth
+
+    if (mustAuth && authStore.isAuth) {
+        next()
+    } else if (mustAuth && !authStore.isAuth) {
+        next('auth')
+    } else {
+        next()
+    }
 })
 
 export default router
