@@ -51,6 +51,13 @@ export default {
 <style lang="scss" scoped>
 @import '@/styles/index.scss';
 
+.title {
+  &:last-of-type {
+    align-self: flex-end;
+    height: 25px;
+  }
+}
+
 .form-control {
   &:first-of-type {
     margin-top: 10px;

@@ -1,0 +1,44 @@
+.main {
+  width: 90%;
+  margin: 0 auto;
+  flex-grow: 1;
+  background-color: $cream;
+  box-shadow: 0 0 3px $brown;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__books {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__container {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 3rem;
+    justify-content: center;
+  }
+}
+
+#error {
+  width: 100%;
+  text-align: center;
+  font-family: 'Blokgauz';
+  font-weight: 700;
+  color: $brown;
+  height: 0;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  height: 100px;
+}

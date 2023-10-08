@@ -1,0 +1,50 @@
+.footer {
+  margin-top: 15px;
+  width: 100%;
+  height: 80px;
+  background: #dfd8c8cc;
+  display: flex;
+  padding: 0;
+  z-index: +100;
+  overflow: hidden;
+  font-family: 'Blokgauz';
+  font-style: italic;
+  background-image: url($bas-relief);
+  background: linear-gradient(to top, transparent 95%);
+  position: fixed;
+  bottom: 0;
+}
+
+@media (max-width: 500px) {
+  .footer {
+    height: 150px;
+    padding-bottom: 20px;
+  }
+}
+
+/* ============================== TEXT ==================================== */
+
+.footer__text {
+  font-family: 'Blokgauz';
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 2;
+  color: $dark;
+  text-shadow: 0 0 3px $gold;
+  margin-right: 20px;
+  transition: all 0.5s ease;
+}
+
+.github:hover,
+.github:focus {
+  color: $gold;
+  text-shadow: 0 0 10px $white;
+  cursor: pointer;
+}
+
+/* ============================= LOGO ======================================= */
+
+.footer__logo {
+  height: 50px;
+}

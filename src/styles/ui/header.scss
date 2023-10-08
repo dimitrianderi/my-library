@@ -1,0 +1,42 @@
+header {
+  padding: 20px 0;
+  background-image: url($bas-relief);
+  background-size: 220%;
+  top: 0;
+  background-color: $brown;
+  width: 80%;
+  z-index: 0;
+  margin: 0 auto;
+  position: relative;
+  font-family: 'Blokgauz';
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    background-position: bottom;
+    background-size: 100%;
+    object-fit: cover;
+    height: 100%;
+    width: 95px;
+  }
+
+  &::before {
+    left: 0;
+    background-image: url($flower-left);
+  }
+
+  &::after {
+    right: 0;
+    background-image: url($flower-right);
+  }
+
+  h1 {
+    font-size: 40px;
+    font-weight: 800;
+    color: $dark;
+    text-align: center;
+    text-shadow: 0 0 5px $gold;
+  }
+}

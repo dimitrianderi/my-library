@@ -10,6 +10,9 @@ $white: #fff;
 $scarlet: #f19ea3;
 
 $main-background: '@/assets/img/background.jpg';
+$flower-left: '@/assets/img/flower-left.png';
+$flower-right: '@/assets/img/flower-right.png';
+$bas-relief: '@/assets/img/basrelief.jpg';
 
 @mixin btn($width: 200px, $radius: 8px, $size: 16px, $shadow-width: 0) {
   width: $width;
@@ -53,11 +56,7 @@ $main-background: '@/assets/img/background.jpg';
   text-align: center;
   background-color: $brown;
   padding: 5px 10px;
-
-  &:last-of-type {
-    align-self: flex-end;
-    height: 25px;
-  }
+  box-shadow: 0 0 3px $brown;
 }
 
 @mixin form-control() {
