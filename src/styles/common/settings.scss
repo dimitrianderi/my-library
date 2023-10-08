@@ -26,11 +26,22 @@ $main-background: '@/assets/img/background.jpg';
   box-shadow: 0 0 $shadow-width $brown;
   transition: all 0.5s ease;
 
-  &:active,
-  &:hover,
-  &:focus {
+  &:not([disabled]):active,
+  &:not([disabled]):hover,
+  &:not([disabled]):focus {
     color: $gold;
     text-shadow: 0 0 10px $white;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:active,
+    &:hover,
+    &:focus {
+      color: $dark;
+      text-shadow: 0 0 4px $gold;
+    }
   }
 }
 

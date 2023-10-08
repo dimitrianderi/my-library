@@ -11,6 +11,7 @@ export function useLoginForm() {
     const MIN_PASS = 6
     const isErrorEmail = ref(false)
     const isErrorPass = ref(false)
+    const isErrAuth = computed(() => authStore.getErrAuth);
 
     const { value: email, errorMessage: errorEmail } = useField(
         'email',
@@ -29,13 +30,16 @@ export function useLoginForm() {
             .min(MIN_PASS, `в пароле должно быть минимум ${MIN_PASS} символов`)
     )
 
-    const onSubmit = handleSubmit( async (values) => {
+    const onSubmit = handleSubmit(async (values) => {
         try {
             await authStore.login(values)
             router.push('/')
-            console.log(2222222222222222)
-        } catch(e) {}
+        } catch (e) { }
     })
+
+    const clearErrAuth = () => {
+        authStore.clearErrAuth()
+    }
 
     watch(submitCount, (newValue) => {
         if (newValue > 0) {
@@ -53,10 +57,11 @@ export function useLoginForm() {
 
     return {
         email,
-        errorEmail: computed(() => isErrorEmail.value ? errorEmail.value : ''),
+        errorEmail: computed(() => isErrorEmail.value ? (errorEmail.value || isErrAuth.value) : ''),
         pass,
-        errorPass: computed(() => isErrorPass.value ? errorPass.value : ''),
+        errorPass: computed(() => isErrorPass.value ? (errorPass.value || isErrAuth.value) : ''),
         isSubmitting,
         onSubmit,
+        clearErrAuth
     }
 }

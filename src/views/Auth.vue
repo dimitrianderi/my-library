@@ -23,7 +23,13 @@
       />
     </div>
     <small class="errorText">{{ errorPass }}</small>
-    <button type="submit" class="btn" id="isInBasket" :disabled="isSubmitting">
+    <button
+      type="submit"
+      class="btn"
+      id="isInBasket"
+      :disabled="isSubmitting"
+      @click="clearErrAuth"
+    >
       Войти
     </button>
     <h2 class="title"></h2>
