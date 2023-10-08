@@ -29,7 +29,7 @@ const router = createRouter({
     linkExactActiveClass: 'active'
 })
 
-router.beforeEach((to, _, next) => {
+router.beforeEach((to, from, next) => {
     const authStore = useAuthStore()
     const mustAuth = to.meta.auth
 
@@ -37,6 +37,8 @@ router.beforeEach((to, _, next) => {
         next()
     } else if (mustAuth && !authStore.isAuth) {
         next('auth')
+    } else if (!mustAuth && authStore.isAuth) {
+        next(from.path)
     } else {
         next()
     }

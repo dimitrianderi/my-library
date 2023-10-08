@@ -48,15 +48,16 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   }
 }
 
-@mixin title($color: $cream, $size: 18px, $font: 'Blokgauz') {
+@mixin title($align: center, $width: 100%, $color: $cream, $size: 18px, $font: 'Blokgauz') {
   color: $color;
   font-family: $font;
   font-size: $size;
-  width: 100%;
-  text-align: center;
+  width: $width;
+  text-align: $align;
   background-color: $brown;
   padding: 5px 10px;
   box-shadow: 0 0 3px $brown;
+  color: $color;
 }
 
 @mixin form-control() {
