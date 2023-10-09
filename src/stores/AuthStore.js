@@ -17,11 +17,7 @@ export const useAuthStore = defineStore('authStore', () => {
     const setToken = (newToken) => token.value = newToken
     const setErrAuth = (errorMessage) => errAuth.value = errorMessage
     const clearErrAuth = () => errAuth.value = null
-    const logout = () => {
-        token.value = null
-        console.log(isAuth.value)
-        localStorage.removeItem(TOKEN_KEY)
-    }
+    const logout = () => token.value = null
 
     const login = async (payload) => {
         try {
