@@ -41,3 +41,9 @@
   column-gap: 20px;
   padding: 10px;
 }
+
+.create__errorText {
+  @include errorText;
+  justify-content: flex-end;
+  margin-right: 10px;
+}

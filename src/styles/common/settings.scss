@@ -166,4 +166,8 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   border: none;
   display: flex;
   align-items: center;
+
+  &.error {
+    background: $scarlet;
+  }
 }

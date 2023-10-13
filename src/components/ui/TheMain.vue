@@ -3,7 +3,7 @@
     <span>Список ваших книг</span>
     <teleport to="body">
       <app-modal v-if="modal" @offModal="offModal" title="Добавить книгу">
-        <request-create></request-create>
+        <request-create @offModal="offModal"></request-create>
       </app-modal>
     </teleport>
     <span class="cross" @click="onModal"></span>

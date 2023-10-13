@@ -1,12 +1,12 @@
 <template>
   <div :class="`${name}__form-control`">
     <label :class="`${name}__label`" :for="modelValue">{{ label }}:</label>
-    <select :id="modelValue" :class="`${name}__select`" :value="modelValue" @change="onChange">
-      <option selected value="default">Отсутствует</option>
+    <select :id="modelValue" :class="[`${name}__select`, { error: error }]" :value="modelValue" @change="onChange">
+      <option selected value="">Отсутствует</option>
       <option v-for="(option, key) in options" :value="option.value" :key="key">{{ option.name }}</option>
     </select>
   </div>
-  <small :class="`${name}__errorText`">{{ errorEmail }}</small>
+  <small :class="`${name}__errorText`">{{ error }}</small>
 </template>
 
 <script>
@@ -16,6 +16,7 @@ export default {
     id: String,
     label: String,
     modelValue: String,
+    error: String,
     options: Array
   },
   emits: ['update:modelValue'],
