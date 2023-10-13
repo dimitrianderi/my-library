@@ -1,38 +1,37 @@
 <template>
-  <form class="modal" @submit.prevent="onSubmit">
-    <h2 class="title">Авторизация</h2>
-    <div class="form-control">
-      <label class="label" for="email">Почта:</label>
+  <form class="auth__modal" @submit.prevent="onSubmit">
+    <h2 class="auth__title">Авторизация</h2>
+    <div class="auth__form-control">
+      <label class="auth__label" for="email">Почта:</label>
       <input
-        :class="['input', { error: errorEmail }]"
+        :class="['auth__input', { error: errorEmail }]"
         type="email"
         id="email"
         v-model="email"
         autocomplete="on"
       />
     </div>
-    <small class="errorText">{{ errorEmail }}</small>
-    <div class="form-control">
-      <label class="label" for="pass">Пароль:</label>
+    <small class="auth__errorText">{{ errorEmail }}</small>
+    <div class="auth__form-control">
+      <label class="auth__label" for="pass">Пароль:</label>
       <input
-        :class="['input', { error: errorPass }]"
+        :class="['auth__input', { error: errorPass }]"
         type="password"
         id="password"
         v-model="pass"
         autocomplete="off"
       />
     </div>
-    <small class="errorText">{{ errorPass }}</small>
+    <small class="auth__errorText">{{ errorPass }}</small>
     <button
       type="submit"
-      class="btn"
-      id="isInBasket"
+      class="auth__btn"
       :disabled="isSubmitting"
       @click="clearErrAuth"
     >
       Войти
     </button>
-    <h2 class="title"></h2>
+    <h2 class="auth__title"></h2>
   </form>
 </template>
 
@@ -48,24 +47,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/index.scss';
-
-.title {
-  &:last-of-type {
-    align-self: flex-end;
-    height: 25px;
-  }
-}
-
-.form-control {
-  &:first-of-type {
-    margin-top: 10px;
-  }
-}
-
-.btn {
-  margin: 10px 0;
-  align-self: center;
-}
-</style>
+<style></style>

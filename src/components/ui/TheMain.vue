@@ -1,5 +1,13 @@
 <template>
-  <h2 class="title">Список ваших книг</h2>
+  <div class="main__title">
+    <span>Список ваших книг</span>
+    <teleport to="body">
+      <app-modal v-if="modal" @offModal="offModal" title="Добавить книгу">
+        <request-create></request-create>
+      </app-modal>
+    </teleport>
+    <span class="cross" @click="onModal"></span>
+  </div>
   <main class="main">
     <div class="main__books">
       <span id="error">Тут пусто</span>
@@ -9,13 +17,28 @@
 </template>
 
 <script>
-export default {}
+import { ref } from 'vue'
+import AppModal from './AppModal.vue'
+import RequestCreate from '../requests/RequestCreate.vue'
+export default {
+  setup() {
+    const modal = ref(false)
+    const onModal = () => {
+        modal.value = true
+    }
+
+    const offModal = () => {
+        modal.value = false
+    }
+
+    return {
+        modal,
+        onModal,
+        offModal
+    }
+  },
+  components: { AppModal, RequestCreate },
+}
 </script>
 
-<style lang="scss" scoped>
-.title {
-  width: 90%;
-  margin: 0 auto;
-  text-align: start;
-}
-</style>
+<style></style>

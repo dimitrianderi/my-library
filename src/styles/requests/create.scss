@@ -1,0 +1,43 @@
+
+
+.create__form {
+  @include form;
+}
+
+.create__form-control {
+  @include form-control;
+  margin-top: 0;
+  width: 400px;
+  height: 45px;
+}
+
+.create__label {
+  @include label;
+}
+
+.create__input {
+  @include input;
+}
+
+.create__errorText {
+  @include errorText;
+  margin-right: 10px;
+}
+
+.create__btn {
+  @include btn;
+
+  margin: 10px 0;
+  align-self: center;
+}
+
+.create__select {
+    @include select;
+}
+
+.controls {
+  column-count: 2;
+  display: block;
+  column-gap: 20px;
+  padding: 10px;
+}

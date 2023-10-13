@@ -1,28 +1,41 @@
-.modal {
+.auth__modal {
   @include modal;
+  width: 350px;
 }
 
-.title {
+.auth__title {
   @include title;
+
+  &:last-of-type {
+    align-self: flex-end;
+    height: 25px;
+  }
 }
 
-.form-control {
+.auth__form-control {
   @include form-control;
+
+  &:first-of-type {
+    margin-top: 10px;
+  }
 }
 
-.label {
+.auth__label {
   @include label;
 }
 
-.input {
+.auth__input {
   @include input;
 }
 
-.errorText {
+.auth__errorText {
   @include errorText;
   margin-right: 10px;
 }
 
-.btn {
+.auth__btn {
   @include btn;
+
+  margin: 10px 0;
+  align-self: center;
 }

@@ -5,6 +5,7 @@ $brown: #461515;
 $cream: #d6cbb5;
 $gold: #f0e68c;
 $gray: #808080;
+$gray-light: #9a938c80;
 $input-shadow: #f9f0da;
 $white: #fff;
 $scarlet: #f19ea3;
@@ -48,7 +49,13 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   }
 }
 
-@mixin title($align: center, $width: 100%, $color: $cream, $size: 18px, $font: 'Blokgauz') {
+@mixin title(
+  $align: center,
+  $width: 100%,
+  $color: $cream,
+  $size: 18px,
+  $font: 'Blokgauz'
+) {
   color: $color;
   font-family: $font;
   font-size: $size;
@@ -61,8 +68,8 @@ $bas-relief: '@/assets/img/basrelief.jpg';
 }
 
 @mixin form-control() {
-  width: 100%;
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 10px $input-shadow;
@@ -81,7 +88,7 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   padding-left: 5px;
 }
 
-@mixin input($width: 240px, $height: 32px, $size: 16px, $font: 'Blokgauz') {
+@mixin input($width: 240px, $height: 32px, $size: 16px) {
   width: $width;
   height: $height;
   padding: 0 20px;
@@ -91,9 +98,15 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   box-shadow: inset 1px 1px 5px 1px $gray;
   background: $cream;
   color: $brown;
-  font-family: $font;
+  font-family: 'Blokgauz';
   font-size: $size;
   transition: 0.3s linear;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
   &:hover,
   &:focus {
@@ -115,12 +128,11 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   align-self: flex-end;
 }
 
-@mixin modal($top: 40%, $left: 50%, $width: 350px) {
+@mixin modal($top: 40%, $left: 50%,) {
   position: absolute;
   top: $top;
   left: $left;
   transform: translate(-50%, -50%);
-  width: $width;
   border-radius: 30px;
   overflow: hidden;
   background-color: $cream;
@@ -128,4 +140,30 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+@mixin form() {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin select($width: 240px, $height: 30px, $size: 16px) {
+  outline: none;
+  font-size: $size;
+  font-family: 'Blokgauz';
+  font-weight: 300;
+  color: $dark;
+  text-shadow: 0 0 10px $gold;
+  text-align: center;
+  background: $cream;
+  width: $width;
+  height: $height;
+  box-shadow: inset 2px 2px 5px $gray-light, 1px 1px 5px $white;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  display: flex;
+  align-items: center;
 }
