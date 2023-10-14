@@ -1,10 +1,10 @@
 <template>
   <div :class="`${name}__form-control`">
-    <label :class="`${name}__label`" :for="modelValue">{{ label }}:</label>
+    <label :class="`${name}__label`" :for="id">{{ label }}:</label>
     <input
       :class="[`${name}__input`, { error: error }]"
       :type="type"
-      :id="modelValue"
+      :id="id"
       autocomplete="off"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -17,8 +17,8 @@
 <script>
 export default {
   props: {
-    name: String,
     id: String,
+    name: String,
     type: String,
     label: String,
     error: String,

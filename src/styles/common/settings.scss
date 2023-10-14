@@ -128,7 +128,7 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   align-self: flex-end;
 }
 
-@mixin modal($top: 40%, $left: 50%,) {
+@mixin modal($top: 40%, $left: 50%) {
   position: absolute;
   top: $top;
   left: $left;
@@ -166,8 +166,15 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   border: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   &.error {
     background: $scarlet;
+  }
+
+  &::-ms-expand,
+  &::-webkit-select-moz-appearance {
+    background: transparent;
+    border: none;
   }
 }

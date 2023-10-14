@@ -1,11 +1,12 @@
 <template>
-  <form class="create__form" @submit.prevent="submit">
+  <form class="create__form" @submit.prevent="onSubmit">
     <div class="controls">
       <app-control
         name="create"
         type="text"
         label="Название"
         :error="errorName"
+        id="name"
         v-model="name"
       ></app-control>
       <app-control
@@ -13,6 +14,7 @@
         type="text"
         label="Автор"
         :error="errorAuthor"
+        id="author"
         v-model="author"
       ></app-control>
       <app-select
@@ -20,6 +22,7 @@
         label="Жанр"
         :options="genre_arr"
         :error="errorGenre"
+        id="genre"
         v-model="genre"
       ></app-select>
       <app-select
@@ -27,6 +30,7 @@
         label="Издатель"
         :options="publisher_arr"
         :error="errorPublisher"
+        id="publisher"
         v-model="publisher"
       ></app-select>
       <app-select
@@ -34,6 +38,7 @@
         label="Обложка"
         :options="cover_arr"
         :error="errorCover"
+        id="cover"
         v-model="cover"
       ></app-select>
       <app-control
@@ -41,6 +46,7 @@
         type="number"
         label="Страниц"
         :error="errorPages"
+        id="pages"
         v-model="pages"
       ></app-control>
       <app-control
@@ -48,6 +54,7 @@
         type="number"
         label="Тираж"
         :error="errorCirculation"
+        id="circulation"
         v-model="circulation"
       ></app-control>
       <app-control
@@ -55,6 +62,7 @@
         type="number"
         label="Год"
         :error="errorYear"
+        id="year"
         v-model="year"
       ></app-control>
       <app-control
@@ -62,6 +70,7 @@
         type="number"
         label="Цена"
         :error="errorPrice"
+        id="price"
         v-model="price"
       ></app-control>
       <app-control
@@ -69,11 +78,14 @@
         type="number"
         label="Штук"
         :error="errorAmount"
+        id="amount"
         v-model="amount"
       ></app-control>
     </div>
     <div class="container">
-      <button class="create__btn" @click="$emit('offModal')">Отмена</button>
+      <button type="button" class="create__btn" @click="$emit('offModal')">
+        Отмена
+      </button>
       <button
         type="submit"
         class="create__btn"
@@ -90,12 +102,19 @@
 import AppControl from '@/components/form/AppControl.vue'
 import AppSelect from '@/components/form/AppSelect.vue'
 import { useCreateForm } from '@/use/useCreateForm'
+import { useRequestStore } from '@/stores/RequestStore'
 
 export default {
   components: { AppControl, AppSelect },
-  setup() {
+  emits: ['offModal'],
+  setup(_, { emit }) {
+    const requestStore = useRequestStore()
+    const submit = async (values) => {
+      await requestStore.createBook(values)
+      emit('offModal')
+    }
     return {
-      ...useCreateForm(),
+      ...useCreateForm(submit),
     }
   },
 }

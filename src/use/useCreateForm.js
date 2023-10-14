@@ -2,9 +2,11 @@ import { useField } from 'vee-validate'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { computed, ref, watch } from 'vue'
+import { useRequestStore } from '../stores/RequestStore'
 
-export function useCreateForm() {
+export function useCreateForm(fn) {
     const { handleSubmit, isSubmitting, submitCount } = useForm()
+    const requestStore = useRequestStore()
 
     const isErrorName = ref(false)
     const isErrorAuthor = ref(false)
@@ -51,9 +53,7 @@ export function useCreateForm() {
         { name: 'Аст', value: 'ast' },
     ]
 
-    const submit = handleSubmit((values) => {
-        console.log(values)
-    })
+    const onSubmit = handleSubmit(fn)
 
     watch(submitCount, (newValue) => {
         if (newValue > 0) {
@@ -134,32 +134,11 @@ export function useCreateForm() {
         pages,
         amount,
         cover,
-        errorName,
-        errorAuthor,
-        errorGenre,
-        errorPublisher,
-        errorCover,
-        errorPages,
-        errorCirculation,
-        errorYear,
-        errorPrice,
-        errorAmount,
         genre_arr,
         cover_arr,
         publisher,
         publisher_arr,
-        submit,
         isSubmitting,
-        isErrorName,
-        isErrorAuthor,
-        isErrorGenre,
-        isErrorPublisher,
-        isErrorCover,
-        isErrorPages,
-        isErrorCirculation,
-        isErrorYear,
-        isErrorPrice,
-        isErrorAmount,
         errorName: computed(() => isErrorName.value ? errorName.value : ''),
         errorAuthor: computed(() => isErrorAuthor.value ? errorAuthor.value : ''),
         errorGenre: computed(() => isErrorGenre.value ? errorGenre.value : ''),
@@ -170,5 +149,6 @@ export function useCreateForm() {
         errorYear: computed(() => isErrorYear.value ? errorYear.value : ''),
         errorPrice: computed(() => isErrorPrice.value ? errorPrice.value : ''),
         errorAmount: computed(() => isErrorAmount.value ? errorAmount.value : ''),
+        onSubmit
     }
 }
