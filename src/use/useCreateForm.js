@@ -2,11 +2,9 @@ import { useField } from 'vee-validate'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { computed, ref, watch } from 'vue'
-import { useRequestStore } from '../stores/RequestStore'
 
 export function useCreateForm(fn) {
     const { handleSubmit, isSubmitting, submitCount } = useForm()
-    const requestStore = useRequestStore()
 
     const isErrorName = ref(false)
     const isErrorAuthor = ref(false)
@@ -19,8 +17,8 @@ export function useCreateForm(fn) {
     const isErrorPrice = ref(false)
     const isErrorAmount = ref(false)
 
-    const { value: name, errorMessage: errorName } = useField(
-        'name',
+    const { value: title, errorMessage: errorName } = useField(
+        'title',
         yup.string().trim().required('Введите название книги')
     )
     const { value: author, errorMessage: errorAuthor } = useField('author', yup.string().trim().required('Введите автора книги'))
@@ -53,7 +51,7 @@ export function useCreateForm(fn) {
         { name: 'Аст', value: 'ast' },
     ]
 
-    const onSubmit = handleSubmit(fn)
+    const onSubmit = handleSubmit(fn) 
 
     watch(submitCount, (newValue) => {
         if (newValue > 0) {
@@ -72,7 +70,7 @@ export function useCreateForm(fn) {
 
     watch(
         [
-            name,
+            title,
             author,
             genre,
             publisher,
@@ -85,7 +83,7 @@ export function useCreateForm(fn) {
         ],
         (
             [
-                newName,
+                newTitle,
                 newAuthor,
                 newGenre,
                 newPublisher,
@@ -97,7 +95,7 @@ export function useCreateForm(fn) {
                 newAmount,
             ],
             [
-                oldName,
+                oldTitle,
                 oldAuthor,
                 oldGenre,
                 oldPublisher,
@@ -111,7 +109,7 @@ export function useCreateForm(fn) {
         ) => {
             submitCount.value = 0
 
-            isErrorName.value = newName !== oldName ? false : isErrorName.value
+            isErrorName.value = newTitle !== oldTitle ? false : isErrorName.value
             isErrorAuthor.value = newAuthor !== oldAuthor ? false : isErrorAuthor.value
             isErrorGenre.value = newGenre !== oldGenre ? false : isErrorGenre.value
             isErrorPublisher.value = newPublisher !== oldPublisher ? false : isErrorPublisher.value
@@ -125,7 +123,7 @@ export function useCreateForm(fn) {
     )
 
     return {
-        name,
+        title,
         author,
         circulation,
         year,

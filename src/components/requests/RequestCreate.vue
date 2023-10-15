@@ -6,8 +6,8 @@
         type="text"
         label="Название"
         :error="errorName"
-        id="name"
-        v-model="name"
+        id="title"
+        v-model="title"
       ></app-control>
       <app-control
         name="create"
@@ -82,14 +82,20 @@
         v-model="amount"
       ></app-control>
     </div>
+    <hr />
     <div class="container">
       <button type="button" class="create__btn" @click="$emit('offModal')">
         Отмена
       </button>
+      <span
+        :class="['create__title', { error: isRequest === false }]"
+        v-if="isRequest !== null"
+        >{{ isRequest ? 'Книга создана!' : 'Ошибка!' }}</span
+      >
       <button
         type="submit"
         class="create__btn"
-        :disabled="isSubmitting"
+        :disabled="isSubmitting || isRequest"
         @click="clearErrAuth"
       >
         Добавить
@@ -103,18 +109,38 @@ import AppControl from '@/components/form/AppControl.vue'
 import AppSelect from '@/components/form/AppSelect.vue'
 import { useCreateForm } from '@/use/useCreateForm'
 import { useRequestStore } from '@/stores/RequestStore'
+import { useSuccessStore } from '@/stores/SuccessStore'
+import { computed } from 'vue'
 
 export default {
   components: { AppControl, AppSelect },
   emits: ['offModal'],
   setup(_, { emit }) {
+    const successStore = useSuccessStore()
     const requestStore = useRequestStore()
+    const isRequest = computed(() => successStore.getSuccess)
+
     const submit = async (values) => {
       await requestStore.createBook(values)
-      emit('offModal')
+      setTimeout(() => {
+        emit('offModal')
+      }, 1000)
+      if (isRequest) {
+        title.value = ''
+        author.value = ''
+        genre.value = ''
+        publisher.value = ''
+        cover.value = ''
+        pages.value = ''
+        circulation.value = ''
+        year.value = ''
+        price.value = ''
+        amount.value = ''
+      }
     }
     return {
       ...useCreateForm(submit),
+      isRequest,
     }
   },
 }

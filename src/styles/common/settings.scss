@@ -9,6 +9,7 @@ $gray-light: #9a938c80;
 $input-shadow: #f9f0da;
 $white: #fff;
 $scarlet: #f19ea3;
+$success: #008000;
 
 $main-background: '@/assets/img/background.jpg';
 $flower-left: '@/assets/img/flower-left.png';
@@ -16,6 +17,7 @@ $flower-right: '@/assets/img/flower-right.png';
 $bas-relief: '@/assets/img/basrelief.jpg';
 
 @mixin btn($width: 200px, $radius: 8px, $size: 16px, $shadow-width: 0) {
+  min-width: $width;
   width: $width;
   padding: 5px;
   border-radius: $radius;

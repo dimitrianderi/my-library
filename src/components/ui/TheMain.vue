@@ -18,23 +18,26 @@
 
 <script>
 import { ref } from 'vue'
+import { useSuccessStore } from '@/stores/SuccessStore'
 import AppModal from './AppModal.vue'
 import RequestCreate from '../requests/RequestCreate.vue'
 export default {
   setup() {
+    const successStore = useSuccessStore()
     const modal = ref(false)
     const onModal = () => {
-        modal.value = true
+      modal.value = true
     }
 
     const offModal = () => {
-        modal.value = false
+      modal.value = false
+      successStore.updateSuccess(null)
     }
 
     return {
-        modal,
-        onModal,
-        offModal
+      modal,
+      onModal,
+      offModal,
     }
   },
   components: { AppModal, RequestCreate },
