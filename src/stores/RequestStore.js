@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from "@/axios/request";
 import { defineStore } from "pinia";
-import { computed, reactive, ref } from "vue";
+import { computed, ref } from "vue";
 import { useAuthStore } from "./AuthStore";
 import { useSuccessStore } from "@/stores/SuccessStore"
 
@@ -17,7 +17,7 @@ export const useRequestStore = defineStore("RequestStore", () => {
         const token = authStore.getToken
         const user = authStore.getUser.split('.').join('')
         try {
-            const { data } = await axios.post(`https://library-ab8c4-default-rtdb.firebaseio.com/${user}.json?auth=${token}`, payload)
+            const { data } = await axios.post(`/${user}.json?auth=${token}`, payload)
             addBook({ ...payload, id: data.name })
             successStore.updateSuccess(true)
         } catch (err) {
