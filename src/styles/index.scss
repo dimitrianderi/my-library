@@ -15,7 +15,7 @@ body {
   color: $white;
   background: $black;
   font-family: sans-serif;
-
+  
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -24,4 +24,14 @@ body {
   background-size: contain;
   object-fit: contain;
   background-attachment: fixed;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.content {
+  flex: 1 0 auto;
 }

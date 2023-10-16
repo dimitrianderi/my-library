@@ -1,6 +1,10 @@
 <template>
-  <component :is="layout + '-layout'" v-if="layout"></component>
-  <the-footer></the-footer>
+  <div class="wrapper">
+    <div class="content">
+      <component :is="layout + '-layout'" v-if="layout"></component>
+    </div>
+    <the-footer></the-footer>
+  </div>
 </template>
 
 <script>
