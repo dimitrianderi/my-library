@@ -82,6 +82,16 @@
         v-model="amount"
       ></app-control>
     </div>
+    <div class="controls one">
+      <app-control
+        name="create"
+        type="text"
+        label="Путь к картинке"
+        :error="errorImg"
+        id="img"
+        v-model="img"
+      ></app-control>
+    </div>
     <hr />
     <div class="container">
       <button type="button" class="create__btn" @click="$emit('offModal')">
@@ -136,6 +146,7 @@ export default {
         year.value = ''
         price.value = ''
         amount.value = ''
+        img.value = ''
       }
     }
     return {

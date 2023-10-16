@@ -1,0 +1,84 @@
+.book {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  box-shadow: 0 0 3px $brown;
+  justify-self: center;
+
+  &__img {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__info {
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    background: url($page) repeat;
+  }
+
+  &__title {
+    width: 100%;
+    font-family: 'Blokgauz-italic';
+    font-size: 18px;
+    font-weight: 700;
+    color: $brown;
+    text-align: center;
+    padding-bottom: 15px;
+  }
+
+  &__text,
+  &__desc,
+  &__price {
+    @include text();
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__desc {
+    font-family: 'Blokgauz-italic';
+    font-size: 14px;
+    font-weight: 300;
+    justify-self: right;
+  }
+
+  &__price {
+    width: 100%;
+    color: $red;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    border: 1px solid $black;
+    transform: rotate(3deg);
+  }
+
+  &__btn {
+    @include btn (100%, 8px, 20px, 5px);
+
+    width: 100%;
+    margin-top: 10px;
+    padding: 6px 10px 12px 10px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.line {
+  padding-bottom: 8px;
+}
+
+.hr {
+  background-color: #461515;
+}

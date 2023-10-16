@@ -11,8 +11,6 @@
   font-style: italic;
   background-image: url($bas-relief);
   background: linear-gradient(to top, transparent 95%);
-  position: fixed;
-  bottom: 0;
 }
 
 @media (max-width: 500px) {

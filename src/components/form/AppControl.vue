@@ -8,7 +8,7 @@
       autocomplete="off"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-      maxlength="25"
+      maxlength="70"
     />
   </div>
   <small :class="`${name}__errorText`">{{ error }}</small>

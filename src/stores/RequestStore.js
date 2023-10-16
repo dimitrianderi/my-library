@@ -10,6 +10,8 @@ export const useRequestStore = defineStore("RequestStore", () => {
     const books = ref([])
 
     const getBooks = computed(() => books.value)
+    const setBooks = (requests) => books.value = requests
+
 
     const addBook = (book) => books.value.push(book)
 
@@ -26,8 +28,21 @@ export const useRequestStore = defineStore("RequestStore", () => {
         }
     }
 
+    const loadBooks = async () => {
+        const token = authStore.getToken
+        const user = authStore.getUser.split('.').join('')
+        try {
+            const { data } = await axios.get(`/${user}.json?auth=${token}`)
+            if (data) {
+                const requests = Object.keys(data).map(id => ({ ...data[id], id }))
+                setBooks(requests)
+            }
+        } catch (err) { }
+    }
+
     return {
         getBooks,
         createBook,
+        loadBooks, books
     }
 })

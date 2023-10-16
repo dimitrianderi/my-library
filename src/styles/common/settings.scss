@@ -7,6 +7,7 @@ $gold: #f0e68c;
 $gray: #808080;
 $gray-light: #9a938c80;
 $input-shadow: #f9f0da;
+$red: #ff0000;
 $white: #fff;
 $scarlet: #f19ea3;
 $success: #008000;
@@ -15,6 +16,7 @@ $main-background: '@/assets/img/background.jpg';
 $flower-left: '@/assets/img/flower-left.png';
 $flower-right: '@/assets/img/flower-right.png';
 $bas-relief: '@/assets/img/basrelief.jpg';
+$page: '@/assets/img/page.png';
 
 @mixin btn($width: 200px, $radius: 8px, $size: 16px, $shadow-width: 0) {
   min-width: $width;
@@ -66,6 +68,7 @@ $bas-relief: '@/assets/img/basrelief.jpg';
   background-color: $brown;
   padding: 5px 10px;
   box-shadow: 0 0 3px $brown;
+  font-weight: 700;
   color: $color;
 }
 
@@ -179,4 +182,11 @@ $bas-relief: '@/assets/img/basrelief.jpg';
     background: transparent;
     border: none;
   }
+}
+
+@mixin text($size: 16px, $color: $brown, $family: 'Blokgauz', $weight: 700) {
+  font-size: $size;
+  font-family: $family;
+  font-weight: $weight;
+  color: $color;
 }

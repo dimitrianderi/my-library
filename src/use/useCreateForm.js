@@ -16,6 +16,7 @@ export function useCreateForm(fn) {
     const isErrorYear = ref(false)
     const isErrorPrice = ref(false)
     const isErrorAmount = ref(false)
+    const isErrorImg = ref(false)
 
     const { value: title, errorMessage: errorName } = useField(
         'title',
@@ -32,6 +33,7 @@ export function useCreateForm(fn) {
     const { value: year, errorMessage: errorYear } = useField('year', yup.string().trim().required('Введите год издания книги'))
     const { value: price, errorMessage: errorPrice } = useField('price', yup.string().trim().required('Введите стоимость книги'))
     const { value: amount, errorMessage: errorAmount } = useField('amount', yup.string().trim().required('Введите количетсво экземпляров'))
+    const { value: img, errorMessage: errorImg } = useField('img', yup.string().trim().required('Введите url к изображению'))
 
     const genre_arr = [
         { name: 'Классика', value: 'classic' },
@@ -65,6 +67,7 @@ export function useCreateForm(fn) {
             isErrorYear.value = true
             isErrorPrice.value = true
             isErrorAmount.value = true
+            isErrorImg.value = true
         }
     })
 
@@ -80,6 +83,7 @@ export function useCreateForm(fn) {
             year,
             price,
             amount,
+            img
         ],
         (
             [
@@ -93,6 +97,7 @@ export function useCreateForm(fn) {
                 newYear,
                 newPrice,
                 newAmount,
+                newImg,
             ],
             [
                 oldTitle,
@@ -105,6 +110,7 @@ export function useCreateForm(fn) {
                 oldYear,
                 oldPrice,
                 oldAmount,
+                oldImg,
             ]
         ) => {
             submitCount.value = 0
@@ -119,6 +125,7 @@ export function useCreateForm(fn) {
             isErrorYear.value = newYear !== oldYear ? false : isErrorYear.value
             isErrorPrice.value = newPrice !== oldPrice ? false : isErrorPrice.value
             isErrorAmount.value = newAmount !== oldAmount ? false : isErrorAmount.value
+            isErrorImg.value = newImg !== oldImg ? false : isErrorImg.value
         }
     )
 
@@ -132,6 +139,7 @@ export function useCreateForm(fn) {
         pages,
         amount,
         cover,
+        img,
         genre_arr,
         cover_arr,
         publisher,
@@ -147,6 +155,7 @@ export function useCreateForm(fn) {
         errorYear: computed(() => isErrorYear.value ? errorYear.value : ''),
         errorPrice: computed(() => isErrorPrice.value ? errorPrice.value : ''),
         errorAmount: computed(() => isErrorAmount.value ? errorAmount.value : ''),
+        errorImg: computed(() => isErrorImg.value ? errorImg.value : ''),
         onSubmit
     }
 }
