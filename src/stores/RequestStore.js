@@ -37,7 +37,9 @@ export const useRequestStore = defineStore("RequestStore", () => {
                 const requests = Object.keys(data).map(id => ({ ...data[id], id }))
                 setBooks(requests)
             }
-        } catch (err) { }
+        } catch (err) {
+            throw new Error()
+        }
     }
 
     return {

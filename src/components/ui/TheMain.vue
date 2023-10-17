@@ -10,7 +10,8 @@
   </div>
   <main class="main">
     <div class="main__books">
-      <request-items :requests="requests"></request-items>
+      <app-loader v-if="loader"></app-loader>
+      <request-items :requests="requests" v-else></request-items>
     </div>
   </main>
 </template>
@@ -22,11 +23,14 @@ import { useRequestStore } from '@/stores/RequestStore'
 import AppModal from './AppModal.vue'
 import RequestCreate from '@/components/requests/RequestCreate.vue'
 import RequestItems from '../requests/RequestItems.vue'
+import AppLoader from './AppLoader.vue'
 export default {
   setup() {
     const successStore = useSuccessStore()
     const requestStore = useRequestStore()
     const modal = ref(false)
+    const loader = ref(false)
+
     const onModal = () => {
       modal.value = true
     }
@@ -37,7 +41,9 @@ export default {
     }
 
     onMounted(async () => {
+      loader.value = true
       await requestStore.loadBooks()
+      loader.value = false
     })
 
     const requests = computed(() => requestStore.getBooks)
@@ -47,9 +53,10 @@ export default {
       onModal,
       offModal,
       requests,
+      loader,
     }
   },
-  components: { AppModal, RequestCreate, RequestItems },
+  components: { AppModal, RequestCreate, RequestItems, AppLoader },
 }
 </script>
 
