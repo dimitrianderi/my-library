@@ -1,4 +1,4 @@
-const GENRE_CODES = {
+export const GENRE_CODES = {
     'classic': 'классика',
     'history': 'история',
     'philosophy': 'философия',

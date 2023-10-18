@@ -1,4 +1,5 @@
 <template>
+  <the-nav></the-nav>
   <div class="main__title">
     <span>Список ваших книг</span>
     <teleport to="body">
@@ -24,6 +25,7 @@ import AppModal from './AppModal.vue'
 import RequestCreate from '@/components/requests/RequestCreate.vue'
 import RequestItems from '../requests/RequestItems.vue'
 import AppLoader from './AppLoader.vue'
+import TheNav from './TheNav.vue'
 export default {
   setup() {
     const successStore = useSuccessStore()
@@ -56,7 +58,7 @@ export default {
       loader,
     }
   },
-  components: { AppModal, RequestCreate, RequestItems, AppLoader },
+  components: { AppModal, RequestCreate, RequestItems, AppLoader, TheNav },
 }
 </script>
 

@@ -1,0 +1,77 @@
+.nav {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 1;
+
+  &__genres {
+    width: 100%;
+    background-color: $cream;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+
+    &__btn {
+      visibility: hidden;
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__genre {
+    min-width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: hidden;
+    padding-bottom: 5px;
+    cursor: pointer;
+
+    &__img {
+      width: auto;
+      max-width: 100px;
+      height: 80px;
+      background-size: 100%;
+      object-fit: cover;
+    }
+
+    &:hover > .nav__genre__title {
+      text-shadow: 0 0 1px $dark;
+    }
+  }
+
+  &__genre__title {
+    width: 100%;
+    text-align: center;
+    color: $brown;
+    font-family: 'Blokgauz-italic';
+    position: relative;
+    transition: all 0.3s ease;
+
+    &::before {
+      position: absolute;
+      content: '';
+      bottom: -5px;
+      left: -100%;
+      width: 100%;
+      height: 1px;
+      background: $brown;
+      transition: all 0.5s ease;
+    }
+  }
+}
+
+#classic:checked ~ .nav__genres #classic-label .nav__genre__title::before,
+#history:checked ~ .nav__genres #history-label .nav__genre__title::before,
+#philosophy:checked ~ .nav__genres #philosophy-label .nav__genre__title::before,
+#poetry:checked ~ .nav__genres #poetry-label .nav__genre__title::before,
+#fiction:checked ~ .nav__genres #fiction-label .nav__genre__title::before,
+#adventure:checked
+  ~ .nav__genres
+  #adventure-label
+  .nav__genre__title::before {
+  left: 0;
+}
