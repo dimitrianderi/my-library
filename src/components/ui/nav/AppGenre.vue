@@ -1,5 +1,10 @@
 <template>
-  <label class="nav__genre" :for="genre" :id="genre + '-label'">
+  <label
+    class="nav__genre"
+    :for="genre"
+    :id="genre + '-label'"
+    @click="$emit('click', genre)"
+  >
     <img class="nav__genre__img" :src="genreImages[genre]" :alt="genre" />
     <span class="nav__genre__title">{{
       title.charAt(0).toUpperCase() + title.slice(1)
@@ -20,6 +25,7 @@ export default {
     title: String,
     genre: String,
   },
+  emits: ['click'],
   setup() {
     const genreImages = {
       classic: classic,

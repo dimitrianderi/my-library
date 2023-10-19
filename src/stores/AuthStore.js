@@ -1,5 +1,6 @@
 import axios from "axios";
 import { defineStore } from "pinia";
+import { useFilterStore } from "@/stores/FilterStore";
 import { computed, ref, watch } from "vue";
 import { error } from "@/utils/errors";
 const TOKEN_KEY = 'token'
@@ -8,6 +9,8 @@ const KEY = import.meta.env.VITE_AUTH_KEY
 const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${KEY}`
 
 export const useAuthStore = defineStore('authStore', () => {
+    const filterStore = useFilterStore()
+
     const token = ref(localStorage.getItem(TOKEN_KEY))
     const user = ref(localStorage.getItem(USER))
     const errAuth = ref('')
@@ -21,9 +24,11 @@ export const useAuthStore = defineStore('authStore', () => {
     const setEmail = (newEmail) => user.value = newEmail
     const setErrAuth = (errorMessage) => errAuth.value = errorMessage
     const clearErrAuth = () => errAuth.value = null
+
     const logout = () => {
         token.value = null
         user.value = null
+        filterStore.clearFilters()
     }
 
     const login = async (payload) => {

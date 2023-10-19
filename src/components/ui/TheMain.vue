@@ -19,6 +19,7 @@
 
 <script>
 import { computed, onMounted, ref } from 'vue'
+import { useFilterStore } from '@/stores/FilterStore'
 import { useSuccessStore } from '@/stores/SuccessStore'
 import { useRequestStore } from '@/stores/RequestStore'
 import AppModal from './AppModal.vue'
@@ -30,6 +31,7 @@ export default {
   setup() {
     const successStore = useSuccessStore()
     const requestStore = useRequestStore()
+    const filterStore = useFilterStore()
     const modal = ref(false)
     const loader = ref(false)
 
@@ -48,7 +50,14 @@ export default {
       loader.value = false
     })
 
-    const requests = computed(() => requestStore.getBooks)
+    const requests = computed(() =>
+      requestStore.getBooks.filter((request) => {
+        if (filterStore.getGenres && filterStore.getGenres.length) {
+          return filterStore.getGenres.includes(request.genre)
+        }
+        return requests
+      })
+    )
 
     return {
       modal,
