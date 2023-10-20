@@ -1,4 +1,4 @@
-const PUBLISHER_CODES = {
+export const PUBLISHER_CODES = {
     'azbuka': 'Азбука',
     'eksmo': 'Эксмо',
     'ast': 'Аст'

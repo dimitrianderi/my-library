@@ -17,6 +17,7 @@ $flower-left: '@/assets/img/flower-left.png';
 $flower-right: '@/assets/img/flower-right.png';
 $bas-relief: '@/assets/img/basrelief.jpg';
 $page: '@/assets/img/page.png';
+$close: '@/assets/img/close.png';
 
 @mixin btn($width: 200px, $radius: 8px, $size: 16px, $shadow-width: 0) {
   min-width: $width;
@@ -28,11 +29,12 @@ $page: '@/assets/img/page.png';
   font-weight: 500;
   background-color: $brown;
   color: $dark;
-  text-shadow: 0 0 4px $gold;
+  text-shadow: 0 0 5px $gold;
   letter-spacing: 2px;
   cursor: pointer;
   box-shadow: 0 0 $shadow-width $brown;
   transition: all 0.5s ease;
+  text-align: center;
 
   &:not([disabled]):active,
   &:not([disabled]):hover,
@@ -186,7 +188,7 @@ $page: '@/assets/img/page.png';
 
 @mixin text($size: 16px, $color: $brown, $family: 'Blokgauz', $weight: 700) {
   font-size: $size;
+  color: $color;
   font-family: $family;
   font-weight: $weight;
-  color: $color;
 }

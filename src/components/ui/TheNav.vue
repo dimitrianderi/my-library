@@ -15,6 +15,7 @@
         @click="toggleGenre"
       ></app-genre>
     </div>
+    <app-search></app-search>
   </nav>
 </template>
 
@@ -23,9 +24,10 @@ import { useFilterStore } from '@/stores/FilterStore'
 import { GENRE_CODES } from '@/utils/genres.js'
 import AppCheckbox from '@/components/form/AppCheckbox.vue'
 import AppGenre from '@/components/ui/nav/AppGenre.vue'
+import AppSearch from './nav/AppSearch.vue'
 
 export default {
-  components: { AppCheckbox, AppGenre },
+  components: { AppCheckbox, AppGenre, AppSearch },
   setup() {
     const filterStore = useFilterStore()
 
