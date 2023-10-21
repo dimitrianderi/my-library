@@ -6,6 +6,8 @@
     maxlength="15"
     autocomplete="off"
     :autofocus="autofocus"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
   />
 </template>
 
@@ -13,8 +15,10 @@
 export default {
     props: {
         placeholder: String,
-        autofocus: Boolean
-    }
+        autofocus: Boolean,
+        modelValue: String
+    },
+    emits: ['update:modelValue']
 }
 </script>
 

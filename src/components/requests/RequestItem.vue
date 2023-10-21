@@ -13,7 +13,7 @@
             <span class="book__text">издательство: <span class="book__desc">{{ publishers(request.publisher) }}</span></span>
             <span class="book__text">тираж: <span class="book__desc">{{ request.circulation }}</span></span>
             <span class="book__text">год: <span class="book__desc">{{ request.year }}</span></span>
-            <span class="book__text">Осталось: <span class="book__text">{{ request.amount }}</span> шт.</span>
+            <span class="book__text">Штук: <span class="book__text">{{ request.amount }}</span> шт.</span>
             <span class="book__price">{{ request.price }} руб.</span>
             <div class="book__btn">Изменить</div>
         </div>

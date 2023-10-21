@@ -50,12 +50,24 @@ export default {
       loader.value = false
     })
 
-    const requests = computed(() =>
-      requestStore.getBooks.filter((request) => {
+    const requests = computed(() => requestStore.getBooks
+      .filter((request) => {
         if (filterStore.getGenres && filterStore.getGenres.length) {
           return filterStore.getGenres.includes(request.genre)
         }
         return requests
+      })
+      .filter((request) => {
+        if (filterStore.getInputs['title'] && filterStore.getInputs['title'].length) {
+          return request.title.toLowerCase().includes(filterStore.getInputs['title'].toLowerCase())
+        }
+        return request
+      })
+      .filter((request) => {
+        if (filterStore.getInputs['author'] && filterStore.getInputs['author'].length) {
+          return request.author.toLowerCase().includes(filterStore.getInputs['author'].toLowerCase())
+        }
+        return request
       })
     )
 
