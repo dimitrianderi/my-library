@@ -4,6 +4,7 @@ const GENRES = 'genres'
 const TITLE = 'title'
 const RANGES = 'ranges'
 const SORT = 'sort'
+const PUBLISHERS = 'publishers'
 
 const updateLocalStorage = (val, filterName) => {
     localStorage.setItem(filterName, JSON.stringify(val));
@@ -14,11 +15,13 @@ export const useFilterStore = defineStore('filterStore', () => {
     const inputs = ref(JSON.parse(localStorage.getItem(TITLE)) || [])
     const ranges = ref(JSON.parse(localStorage.getItem(RANGES)) || [])
     const sort = ref(JSON.parse(localStorage.getItem(SORT)) || '')
+    const publishers = ref(JSON.parse(localStorage.getItem(PUBLISHERS)) || [])
 
     const getGenres = computed(() => genres.value)
     const getInputs = computed(() => inputs.value)
     const getRanges = computed(() => ranges.value)
     const getSort = computed(() => sort.value)
+    const getPublishers = computed(() => publishers.value)
 
     const addGenre = (val) => {
         genres.value = [...genres.value, val]
@@ -40,9 +43,19 @@ export const useFilterStore = defineStore('filterStore', () => {
         updateLocalStorage(sort.value, SORT)
     }
 
+    const addPublisher = (val) => {
+        publishers.value = [...publishers.value, val]
+        updateLocalStorage(publishers.value, PUBLISHERS)
+    }
+
     const delGenre = (val) => {
-        genres.value = genres.value.filter(genre => genre !== val);
+        genres.value = genres.value.filter(genre => genre !== val)
         updateLocalStorage(genres.value, GENRES);
+    }
+
+    const delPublisher = (val) => {
+        publishers.value = publishers.value.filter(publisher => publisher !== val)
+        updateLocalStorage(publishers.value, PUBLISHERS)
     }
 
     const clearFilters = () => {
@@ -50,10 +63,12 @@ export const useFilterStore = defineStore('filterStore', () => {
         localStorage.removeItem(TITLE);
         localStorage.removeItem(RANGES);
         localStorage.removeItem(SORT);
+        localStorage.removeItem(PUBLISHERS);
         genres.value = [];
         inputs.value = [];
         ranges.value = [];
         sort.value = [];
+        publishers.value = [];
     }
 
     return {
@@ -61,11 +76,14 @@ export const useFilterStore = defineStore('filterStore', () => {
         getInputs,
         getRanges,
         getSort,
+        getPublishers,
         addGenre,
         addInputs,
         addRanges,
         addSort,
+        addPublisher,
         delGenre,
+        delPublisher,
         clearFilters
     }
 })

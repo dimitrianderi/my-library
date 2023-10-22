@@ -1,34 +1,72 @@
 <template>
   <div class="search__publisher">
-    <input
-      class="search__checkbox"
-      type="checkbox"
-      name="publisher"
-      :id="key"
-      :key="key"
-      v-for="(_, key) in PUBLISHER_CODES"
-    />
+    <app-checkbox
+      v-for="publisher in publishersStore"
+      :key="publisher.id"
+      :id="publisher.id"
+      name="publishers"
+      v-model="publisher.value.value"
+    ></app-checkbox>
     <h2 class="search__menu-title">Издательства</h2>
     <div class="search__container">
-      <label class="search__container-label" for="azbuka" id="azbuka-label">
-        <span class="search__container-text">Азбука</span>
-      </label>
-      <label class="search__container-label" for="eksmo" id="eksmo-label">
-        <span class="search__container-text">Эксмо</span>
-      </label>
-      <label class="search__container-label" for="ast" id="ast-label">
-        <span class="search__container-text">Аст</span>
-      </label>
+      <app-search-label
+        v-for="(publisher, key) in PUBLISHER_CODES"
+        :id="key"
+        :key="key"
+        :title="publisher"
+        @click="togglePublisher"
+      ></app-search-label>
     </div>
   </div>
 </template>
 
 <script>
+import { useFilterStore } from '@/stores/filterStore'
 import { PUBLISHER_CODES } from '@/utils/publishers'
+import AppSearchLabel from './AppSearchLabel.vue'
+import AppCheckbox from '@/components/form/AppCheckbox.vue'
+import { onMounted, ref, watch } from 'vue'
 export default {
+  components: { AppSearchLabel, AppCheckbox },
   setup() {
+    const filterStore = useFilterStore()
+
+    const publishersStore = [
+      {
+        id: 'azbuka',
+        value: ref(filterStore.getPublishers.includes('azbuka') || false),
+      },
+      {
+        id: 'eksmo',
+        value: ref(filterStore.getPublishers.includes('eksmo') || false),
+      },
+      {
+        id: 'ast',
+        value: ref(filterStore.getPublishers.includes('ast') || false),
+      },
+    ]
+
+    watch(
+      () => [filterStore.getPublishers],
+      ([newValue]) => {
+        if (!newValue.length) {
+          publishersStore.forEach((publisher) => {
+            publisher.value.value = false
+          })
+        }
+      }
+    )
+
+    const togglePublisher = (publisher) => {
+      filterStore.getPublishers.includes(publisher)
+        ? filterStore.delPublisher(publisher)
+        : filterStore.addPublisher(publisher)
+    }
+
     return {
       PUBLISHER_CODES,
+      publishersStore,
+      togglePublisher,
     }
   },
 }

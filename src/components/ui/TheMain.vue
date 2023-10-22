@@ -105,6 +105,12 @@ export default {
           }
           return request
         })
+        .filter((request) => {
+          if (filterStore.getPublishers && filterStore.getPublishers.length) {
+            return filterStore.getPublishers.includes(request.publisher)
+          }
+          return requests
+        })
         .sort((a, b) => {
           if (filterStore.getSort.length) {
             return requestSort[filterStore.getSort](a, b)
