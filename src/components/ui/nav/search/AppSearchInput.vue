@@ -5,6 +5,7 @@
     :placeholder="placeholder"
     maxlength="15"
     autocomplete="off"
+    :id="id"
     :autofocus="autofocus"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
@@ -16,7 +17,8 @@ export default {
     props: {
         placeholder: String,
         autofocus: Boolean,
-        modelValue: String
+        modelValue: String,
+        id: String
     },
     emits: ['update:modelValue']
 }

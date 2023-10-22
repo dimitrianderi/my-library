@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {useFilterStore} from '@/stores/FilterStore'
+import { useFilterStore } from '@/stores/FilterStore'
 import AppInput from '@/components/form/AppInput.vue'
 import { ref, watch } from 'vue'
 
@@ -20,16 +20,25 @@ export default {
   components: { AppInput },
   setup() {
     const filterStore = useFilterStore()
-    const sort = ref(filterStore.getSort || '')
+    const sort = ref(filterStore.getSort.length ? filterStore.getSort : '')
 
     watch(sort, (newValue) => {
       filterStore.addSort(newValue)
     })
 
+    watch(
+      () => [filterStore.getSort],
+      ([sort]) => {
+        if (!sort) {
+          sort.value = ''
+        }
+      }
+    )
+
     return {
-      sort
+      sort,
     }
-  }
+  },
 }
 </script>
 

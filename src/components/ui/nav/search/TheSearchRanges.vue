@@ -27,30 +27,63 @@ export default {
         min: '0',
         max: '4000',
         step: '10',
-        minValue: ref(filterStore.getRanges.price ? filterStore.getRanges.price.min.toString() : '0'),
-        maxValue: ref(filterStore.getRanges.price ? filterStore.getRanges.price.max.toString() : '4000')
-
+        minValue: ref(
+          filterStore.getRanges.price
+            ? filterStore.getRanges.price.min.toString()
+            : '0'
+        ),
+        maxValue: ref(
+          filterStore.getRanges.price
+            ? filterStore.getRanges.price.max.toString()
+            : '4000'
+        ),
       },
       {
         title: 'Количество страниц',
         min: '0',
         max: '2000',
         step: '10',
-        minValue: ref(filterStore.getRanges.pages ? filterStore.getRanges.pages.min.toString() : '0'),
-        maxValue: ref(filterStore.getRanges.pages ? filterStore.getRanges.pages.max.toString() : '2000'),
+        minValue: ref(
+          filterStore.getRanges.pages
+            ? filterStore.getRanges.pages.min.toString()
+            : '0'
+        ),
+        maxValue: ref(
+          filterStore.getRanges.pages
+            ? filterStore.getRanges.pages.max.toString()
+            : '2000'
+        ),
       },
     ])
 
-    watch(ranges, (newValue) => {
-      const minPrice = Math.min(+newValue[0].minValue, +newValue[0].maxValue)
-      const maxPrice = Math.max(+newValue[0].minValue, +newValue[0].maxValue)
-      const price = {min: minPrice, max: maxPrice}
-      const minPage = Math.min(+newValue[1].minValue, +newValue[1].maxValue)
-      const maxPage = Math.max(+newValue[1].minValue, +newValue[1].maxValue)
-      const pages = {min: minPage, max: maxPage}
-      const ranges = {price, pages}
-      filterStore.addRanges(ranges)
-    }, {deep: true})
+    watch(
+      ranges,
+      (newValue) => {
+        const minPrice = Math.min(+newValue[0].minValue, +newValue[0].maxValue)
+        const maxPrice = Math.max(+newValue[0].minValue, +newValue[0].maxValue)
+        const price = { min: minPrice, max: maxPrice }
+        const minPage = Math.min(+newValue[1].minValue, +newValue[1].maxValue)
+        const maxPage = Math.max(+newValue[1].minValue, +newValue[1].maxValue)
+        const pages = { min: minPage, max: maxPage }
+        filterStore.addRanges({price, pages})
+      },
+      { deep: true }
+    )
+
+    watch(
+      () => [filterStore.getRanges],
+      ([newValues]) => {
+        if (!newValues.price) {
+          ranges.value[0].minValue = '0'
+          ranges.value[0].maxValue = '4000'
+        }
+        if (!newValues.pages) {
+          ranges.value[1].minValue = '0'
+          ranges.value[1].maxValue = '2000'
+        }
+      },
+      { deep: true }
+    )
 
     return {
       ranges,

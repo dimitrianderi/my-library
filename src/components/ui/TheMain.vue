@@ -106,8 +106,8 @@ export default {
           return request
         })
         .sort((a, b) => {
-          if (filterStore.getSort) {
-            return requestSort[filterStore.getSort](a,b)
+          if (filterStore.getSort.length) {
+            return requestSort[filterStore.getSort](a, b)
           }
         })
     )
