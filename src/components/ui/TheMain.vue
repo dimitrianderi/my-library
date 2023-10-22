@@ -69,6 +69,18 @@ export default {
         }
         return request
       })
+      .filter((request) => {
+        if (filterStore.getRanges.price) {
+          return request.price >= filterStore.getRanges.price.min && request.price <= filterStore.getRanges.price.max
+        }
+        return request
+      })
+      .filter((request) => {
+        if (filterStore.getRanges.pages) {
+          return request.pages >= filterStore.getRanges.pages.min && request.pages <= filterStore.getRanges.pages.max
+        }
+        return request
+      })
     )
 
     return {
