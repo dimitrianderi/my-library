@@ -6,6 +6,7 @@
       :id="publisher.id"
       name="publishers"
       v-model="publisher.value.value"
+      @input="togglePublisher(publisher.id)"
     ></app-checkbox>
     <h2 class="search__menu-title">Издательства</h2>
     <div class="search__container">
@@ -14,7 +15,6 @@
         :id="key"
         :key="key"
         :title="publisher"
-        @click="togglePublisher"
       ></app-search-label>
     </div>
   </div>
@@ -23,9 +23,9 @@
 <script>
 import { useFilterStore } from '@/stores/filterStore'
 import { PUBLISHER_CODES } from '@/utils/publishers'
-import AppSearchLabel from './AppSearchLabel.vue'
+import AppSearchLabel from '@/components/ui/nav/search/AppSearchLabel.vue'
 import AppCheckbox from '@/components/form/AppCheckbox.vue'
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 export default {
   components: { AppSearchLabel, AppCheckbox },
   setup() {

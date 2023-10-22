@@ -6,6 +6,7 @@
       :id="genre.id"
       name="genres"
       v-model="genre.value.value"
+      @input="toggleGenre(genre.id)"
     ></app-checkbox>
     <div class="nav__genres">
       <app-genre
@@ -13,7 +14,6 @@
         :key="key"
         :title="genre"
         :genre="key"
-        @click="toggleGenre"
       ></app-genre>
     </div>
     <app-search></app-search>
