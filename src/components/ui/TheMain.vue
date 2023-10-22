@@ -22,7 +22,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useFilterStore } from '@/stores/FilterStore'
 import { useSuccessStore } from '@/stores/SuccessStore'
 import { useRequestStore } from '@/stores/RequestStore'
-import AppModal from './AppModal.vue'
+import AppModal from '@/components/ui/AppModal.vue'
 import RequestCreate from '@/components/requests/RequestCreate.vue'
 import RequestItems from '../requests/RequestItems.vue'
 import AppLoader from './AppLoader.vue'
@@ -114,6 +114,12 @@ export default {
         .filter((request) => {
           if (filterStore.getCovers && filterStore.getCovers.length) {
             return filterStore.getCovers.includes(request.cover)
+          }
+          return requests
+        })
+        .filter((request) => {
+          if (filterStore.getPopular) {
+            return request.circulation > 20000
           }
           return requests
         })

@@ -5,6 +5,8 @@
       type="checkbox"
       name="cover"
       id="new-input"
+      v-model="popular"
+      @input="togglePopular"
     />
     <h2 class="search__menu-title">Хиты</h2>
     <div class="search__container">
@@ -16,7 +18,34 @@
 </template>
 
 <script>
-export default {}
+import { onMounted, ref, watch } from 'vue'
+import {useFilterStore} from '@/stores/FilterStore'
+
+export default {
+  setup() {
+    const filterStore = useFilterStore()
+
+    const popular = ref(filterStore.getPopular || false)
+
+    watch(
+      () => [filterStore.getPopular],
+      ([newValue]) => {
+        if (!newValue) {
+          popular.value = false
+        }
+      }
+    )
+
+    const togglePopular = () => {
+      filterStore.getPopular ? filterStore.addPopular(false) : filterStore.addPopular(true)
+    }
+
+    return {
+      popular,
+      togglePopular
+    }
+  }
+}
 </script>
 
 <style></style>

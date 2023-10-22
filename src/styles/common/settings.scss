@@ -136,7 +136,7 @@ $close: '@/assets/img/close.png';
 }
 
 @mixin modal($top: 40%, $left: 50%) {
-  position: absolute;
+  position: fixed;
   top: $top;
   left: $left;
   transform: translate(-50%, -50%);

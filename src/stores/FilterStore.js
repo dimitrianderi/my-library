@@ -6,6 +6,7 @@ const RANGES = 'ranges'
 const SORT = 'sort'
 const PUBLISHERS = 'publishers'
 const COVERS = 'covers'
+const POPULAR = 'popular'
 
 const updateLocalStorage = (val, filterName) => {
     localStorage.setItem(filterName, JSON.stringify(val));
@@ -18,6 +19,7 @@ export const useFilterStore = defineStore('filterStore', () => {
     const sort = ref(JSON.parse(localStorage.getItem(SORT)) || '')
     const publishers = ref(JSON.parse(localStorage.getItem(PUBLISHERS)) || [])
     const covers = ref(JSON.parse(localStorage.getItem(COVERS)) || [])
+    const popular = ref(localStorage.getItem(POPULAR) || false)
 
     const getGenres = computed(() => genres.value)
     const getInputs = computed(() => inputs.value)
@@ -25,6 +27,7 @@ export const useFilterStore = defineStore('filterStore', () => {
     const getSort = computed(() => sort.value)
     const getPublishers = computed(() => publishers.value)
     const getCovers = computed(() => covers.value)
+    const getPopular = computed(() => popular.value)
 
     const addGenre = (val) => {
         genres.value = [...genres.value, val]
@@ -56,6 +59,11 @@ export const useFilterStore = defineStore('filterStore', () => {
         updateLocalStorage(covers.value, COVERS)
     }
 
+    const addPopular = (val) => {
+        popular.value = val
+        updateLocalStorage(popular.value, POPULAR)
+    }
+
     const delGenre = (val) => {
         genres.value = genres.value.filter(genre => genre !== val)
         updateLocalStorage(genres.value, GENRES);
@@ -78,12 +86,13 @@ export const useFilterStore = defineStore('filterStore', () => {
         localStorage.removeItem(SORT);
         localStorage.removeItem(PUBLISHERS);
         localStorage.removeItem(COVERS);
+        localStorage.removeItem(POPULAR);
         genres.value = [];
         inputs.value = [];
         ranges.value = [];
         sort.value = [];
         publishers.value = [];
-        covers.value = [];
+        popular.value = false;
     }
 
     return {
@@ -93,12 +102,14 @@ export const useFilterStore = defineStore('filterStore', () => {
         getSort,
         getPublishers,
         getCovers,
+        getPopular,
         addGenre,
         addInputs,
         addRanges,
         addSort,
         addPublisher,
         addCover,
+        addPopular,
         delGenre,
         delPublisher,
         delCover,
