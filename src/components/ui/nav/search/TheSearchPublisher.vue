@@ -4,7 +4,7 @@
       v-for="publisher in publishersStore"
       :key="publisher.id"
       :id="publisher.id"
-      name="publishers"
+      name="publisher"
       v-model="publisher.value.value"
       @input="togglePublisher(publisher.id)"
     ></app-checkbox>

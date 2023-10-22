@@ -111,6 +111,12 @@ export default {
           }
           return requests
         })
+        .filter((request) => {
+          if (filterStore.getCovers && filterStore.getCovers.length) {
+            return filterStore.getCovers.includes(request.cover)
+          }
+          return requests
+        })
         .sort((a, b) => {
           if (filterStore.getSort.length) {
             return requestSort[filterStore.getSort](a, b)

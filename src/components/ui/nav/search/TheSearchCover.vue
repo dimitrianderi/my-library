@@ -1,39 +1,69 @@
 <template>
   <div class="search__cover">
-    <input
-      class="search__checkbox"
-      type="checkbox"
+    <app-checkbox
+      v-for="cover in coversStore"
+      :key="cover.id"
+      :id="cover.id"
       name="cover"
-      :id="key"
-      :key="key"
-      v-for="(_, key) in COVER_CODES"
-    />
+      v-model="cover.value.value"
+      @input="toggleCover(cover.id)"
+    ></app-checkbox>
     <h2 class="search__menu-title">Обложка</h2>
     <div class="search__container">
-      <label
-        class="search__container-label search__cover-label"
-        for="hard"
-        id="hard-label"
-      >
-        <span class="search__container-text">Твердая</span>
-      </label>
-      <label
-        class="search__container-label search__cover-label"
-        for="soft"
-        id="soft-label"
-      >
-        <span class="search__container-text">Мягкая</span>
-      </label>
+      <app-search-label
+        v-for="(cover, key) in COVER_CODES"
+        :key="key"
+        :id="key"
+        class="search__cover-label"
+        :title="cover"
+      ></app-search-label>
     </div>
   </div>
 </template>
 
 <script>
+import { useFilterStore } from '@/stores/filterStore'
 import { COVER_CODES } from '@/utils/covers'
+import AppSearchLabel from './AppSearchLabel.vue'
+import AppCheckbox from '../../../form/AppCheckbox.vue'
+import { ref, watch } from 'vue'
 export default {
+  components: { AppSearchLabel, AppCheckbox },
   setup() {
+    const filterStore = useFilterStore()
+
+    const coversStore = [
+      {
+        id: 'soft',
+        value: ref(filterStore.getCovers.includes('soft') || false),
+      },
+      {
+        id: 'hard',
+        value: ref(filterStore.getCovers.includes('hard') || false),
+      },
+    ]
+
+    watch(
+      () => [filterStore.getCovers],
+      ([newValue]) => {
+        if (!newValue.length) {
+          coversStore.forEach((cover) => {
+            cover.value.value = false
+          })
+        }
+      }
+    )
+
+    const toggleCover = (cover) => {
+      filterStore.getCovers.includes(cover)
+        ? filterStore.delCover(cover)
+        : filterStore.addCover(cover)
+    }
+
     return {
       COVER_CODES,
+      coversStore,
+      toggleCover
     }
   },
 }
