@@ -35,6 +35,13 @@ export default {
     const modal = ref(false)
     const loader = ref(false)
 
+    const requestSort = {
+      'increasing(year)': (a, b) => a.year - b.year,
+      'decreasing(year)': (a, b) => b.year - a.year,
+      'increasing(name)': (a, b) => a.title.localeCompare(b.title),
+      'decreasing(name)': (a, b) => b.title.localeCompare(a.title),
+    }
+
     const onModal = () => {
       modal.value = true
     }
@@ -50,37 +57,59 @@ export default {
       loader.value = false
     })
 
-    const requests = computed(() => requestStore.getBooks
-      .filter((request) => {
-        if (filterStore.getGenres && filterStore.getGenres.length) {
-          return filterStore.getGenres.includes(request.genre)
-        }
-        return requests
-      })
-      .filter((request) => {
-        if (filterStore.getInputs['title'] && filterStore.getInputs['title'].length) {
-          return request.title.toLowerCase().includes(filterStore.getInputs['title'].toLowerCase())
-        }
-        return request
-      })
-      .filter((request) => {
-        if (filterStore.getInputs['author'] && filterStore.getInputs['author'].length) {
-          return request.author.toLowerCase().includes(filterStore.getInputs['author'].toLowerCase())
-        }
-        return request
-      })
-      .filter((request) => {
-        if (filterStore.getRanges.price) {
-          return request.price >= filterStore.getRanges.price.min && request.price <= filterStore.getRanges.price.max
-        }
-        return request
-      })
-      .filter((request) => {
-        if (filterStore.getRanges.pages) {
-          return request.pages >= filterStore.getRanges.pages.min && request.pages <= filterStore.getRanges.pages.max
-        }
-        return request
-      })
+    const requests = computed(() =>
+      requestStore.getBooks
+        .filter((request) => {
+          if (filterStore.getGenres && filterStore.getGenres.length) {
+            return filterStore.getGenres.includes(request.genre)
+          }
+          return requests
+        })
+        .filter((request) => {
+          if (
+            filterStore.getInputs['title'] &&
+            filterStore.getInputs['title'].length
+          ) {
+            return request.title
+              .toLowerCase()
+              .includes(filterStore.getInputs['title'].toLowerCase())
+          }
+          return request
+        })
+        .filter((request) => {
+          if (
+            filterStore.getInputs['author'] &&
+            filterStore.getInputs['author'].length
+          ) {
+            return request.author
+              .toLowerCase()
+              .includes(filterStore.getInputs['author'].toLowerCase())
+          }
+          return request
+        })
+        .filter((request) => {
+          if (filterStore.getRanges.price) {
+            return (
+              request.price >= filterStore.getRanges.price.min &&
+              request.price <= filterStore.getRanges.price.max
+            )
+          }
+          return request
+        })
+        .filter((request) => {
+          if (filterStore.getRanges.pages) {
+            return (
+              request.pages >= filterStore.getRanges.pages.min &&
+              request.pages <= filterStore.getRanges.pages.max
+            )
+          }
+          return request
+        })
+        .sort((a, b) => {
+          if (filterStore.getSort) {
+            return requestSort[filterStore.getSort](a,b)
+          }
+        })
     )
 
     return {

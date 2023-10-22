@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import { useFilterStore } from '@/stores/FilterStore'
 import { ref, watch } from 'vue'
-import AppSearchRange from './AppSearchRange.vue'
+import { useFilterStore } from '@/stores/FilterStore'
+import AppSearchRange from '@/components/ui/nav/search/AppSearchRange.vue'
 export default {
   components: { AppSearchRange },
   setup() {
@@ -27,16 +27,17 @@ export default {
         min: '0',
         max: '4000',
         step: '10',
-        minValue: (filterStore.getRanges.price ? filterStore.getRanges.price.min.toString() : ref('0')),
-        maxValue: (filterStore.getRanges.price ? filterStore.getRanges.price.max.toString() : ref('4000'))
+        minValue: ref(filterStore.getRanges.price ? filterStore.getRanges.price.min.toString() : '0'),
+        maxValue: ref(filterStore.getRanges.price ? filterStore.getRanges.price.max.toString() : '4000')
+
       },
       {
         title: 'Количество страниц',
         min: '0',
         max: '2000',
         step: '10',
-        minValue: (filterStore.getRanges.pages ? filterStore.getRanges.pages.min.toString() : ref('0')),
-        maxValue: (filterStore.getRanges.pages ? filterStore.getRanges.pages.max.toString() : ref('2000')),
+        minValue: ref(filterStore.getRanges.pages ? filterStore.getRanges.pages.min.toString() : '0'),
+        maxValue: ref(filterStore.getRanges.pages ? filterStore.getRanges.pages.max.toString() : '2000'),
       },
     ])
 

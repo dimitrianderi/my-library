@@ -20,8 +20,8 @@ export default {
     const filterStore = useFilterStore()
 
     const inputs = ref([
-      { placeholder: 'по произведению', autofocus: true, value: filterStore.getInputs['title'] || ref('') },
-      { placeholder: 'по автору', autofocus: false, value: filterStore.getInputs['author'] || ref('') },
+      { placeholder: 'по произведению', autofocus: true, value: ref(filterStore.getInputs['title'] || '') },
+      { placeholder: 'по автору', autofocus: false, value: ref(filterStore.getInputs['author'] || '') },
     ])
 
       watch (inputs, (newValue) => {

@@ -16,23 +16,23 @@
         <the-search-new></the-search-new>
       </div>
     </form>
-    
+
     <app-search-image orient="right"></app-search-image>
   </div>
 </template>
 
 <script>
-import AppInput from '../../form/AppInput.vue'
-import AppSearchImage from './search/AppSearchImage.vue'
-import AppSearchInput from './search/AppSearchInput.vue'
-import AppSearchRange from './search/AppSearchRange.vue'
-import TheSearchInputs from './search/TheSearchInputs.vue'
-import TheSearchRanges from './search/TheSearchRanges.vue'
-import TheSearchReset from './search/TheSearchReset.vue'
-import TheSearchSort from './search/TheSearchSort.vue'
-import TheSearchPublisher from './search/TheSearchPublisher.vue'
-import TheSearchCover from './search/TheSearchCover.vue'
-import TheSearchNew from './search/TheSearchNew.vue'
+import AppInput from '@/components/form/AppInput.vue'
+import AppSearchImage from '@/components/ui/nav/search/AppSearchImage.vue'
+import AppSearchInput from '@/components/ui/nav/search/AppSearchInput.vue'
+import AppSearchRange from '@/components/ui/nav/search/AppSearchRange.vue'
+import TheSearchInputs from '@/components/ui/nav/search/TheSearchInputs.vue'
+import TheSearchRanges from '@/components/ui/nav/search/TheSearchRanges.vue'
+import TheSearchReset from '@/components/ui/nav/search/TheSearchReset.vue'
+import TheSearchSort from '@/components/ui/nav/search/TheSearchSort.vue'
+import TheSearchPublisher from '@/components/ui/nav/search/TheSearchPublisher.vue'
+import TheSearchCover from '@/components/ui/nav/search/TheSearchCover.vue'
+import TheSearchNew from '@/components/ui/nav/search/TheSearchNew.vue'
 export default {
   components: {
     AppSearchImage,
