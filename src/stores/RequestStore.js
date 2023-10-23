@@ -14,6 +14,7 @@ export const useRequestStore = defineStore("RequestStore", () => {
 
 
     const addBook = (book) => books.value.push(book)
+
     const replaceBook = (book) => {
         const idx = books.value.findIndex(item => item.id === book.id);
         if (idx !== -1) {
@@ -21,6 +22,14 @@ export const useRequestStore = defineStore("RequestStore", () => {
         }
     }
 
+    const clearBook = (id) => {
+        const idx = books.value.findIndex(item => item.id === id);
+        if (idx !== -1) {
+            console.log('тутэб', id)
+            books.value.splice(idx, 1);
+        }
+        successStore.updateSuccess('')
+    }
 
     const createBook = async (payload) => {
         const token = authStore.getToken
@@ -48,6 +57,21 @@ export const useRequestStore = defineStore("RequestStore", () => {
         }
     }
 
+    const deleteBook = async (id) => {
+        const token = authStore.getToken
+        const user = authStore.getUser.split('.').join('')
+        try {
+            await axios.delete(`/${user}/${id}.json?auth=${token}`)
+            setTimeout(() => {
+                clearBook(id)
+            }, 1000)
+            successStore.updateSuccess('Книга удалена!')
+        } catch (err) {
+            successStore.updateSuccess('')
+            throw new Error()
+        }
+    }
+
     const loadBooks = async () => {
         const token = authStore.getToken
         const user = authStore.getUser.split('.').join('')
@@ -66,6 +90,7 @@ export const useRequestStore = defineStore("RequestStore", () => {
         getBooks,
         createBook,
         updateBook,
-        loadBooks, books
+        deleteBook,
+        loadBooks
     }
 })

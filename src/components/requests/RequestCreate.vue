@@ -92,7 +92,7 @@
         v-model="img"
       ></app-control>
     </div>
-    <input type="hidden" name="id" :value="request.id" v-if="request">
+    <input type="hidden" name="id" :value="request.id" v-if="request" />
     <hr />
     <div class="container">
       <button type="button" class="create__btn" @click="$emit('offModal')">
@@ -115,15 +115,23 @@
       <button
         type="submit"
         class="create__btn"
-        :disabled="isSubmitting || isRequest !== ''"
+        :disabled="isSubmitting || isSubmit || isRequest !== ''"
         @click="clearErrAuth"
         v-else
       >
         Сохранить
       </button>
     </div>
-    <hr>
-    <button v-if="request" class="create__btn delete" type="button">Удалить</button>
+    <hr />
+    <button
+      type="button"
+      class="create__btn delete"
+      :disabled="isSubmitting || isSubmit || isRequest !== ''"
+      @click="del(request.id)"
+      v-if="request"
+    >
+      Удалить
+    </button>
   </form>
 </template>
 
@@ -133,18 +141,19 @@ import AppSelect from '@/components/form/AppSelect.vue'
 import { useCreateForm } from '@/use/useCreateForm'
 import { useRequestStore } from '@/stores/RequestStore'
 import { useSuccessStore } from '@/stores/SuccessStore'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 export default {
   components: { AppControl, AppSelect },
   emits: ['offModal'],
   props: {
-    request: Object
+    request: Object,
   },
   setup(props, { emit }) {
     const successStore = useSuccessStore()
     const requestStore = useRequestStore()
     const isRequest = computed(() => successStore.getSuccess)
+    const isSubmit = ref(false)
 
     const submit = async (values) => {
       await requestStore.createBook(values)
@@ -160,9 +169,21 @@ export default {
       }, 1000)
     }
 
+    const del = async (id) => {
+      isSubmit.value = true
+      try {
+        await requestStore.deleteBook(id)
+      } catch (e) {
+      } finally {
+        isSubmit.value = false
+      }
+    }
+
     return {
       ...useCreateForm(submit, props.request, update),
       isRequest,
+      del,
+      isSubmit,
     }
   },
 }
