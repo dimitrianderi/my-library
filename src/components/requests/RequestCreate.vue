@@ -85,13 +85,14 @@
     <div class="controls one">
       <app-control
         name="create"
-        type="text"
+        type="search"
         label="Путь к картинке"
         :error="errorImg"
         id="img"
         v-model="img"
       ></app-control>
     </div>
+    <input type="hidden" name="id" :value="request.id" v-if="request">
     <hr />
     <div class="container">
       <button type="button" class="create__btn" @click="$emit('offModal')">
@@ -99,18 +100,30 @@
       </button>
       <span
         :class="['create__title', { error: isRequest === false }]"
-        v-if="isRequest !== null"
-        >{{ isRequest ? 'Книга создана!' : 'Ошибка!' }}</span
+        v-if="isRequest !== ''"
+        >{{ isRequest ? isRequest : 'Ошибка!' }}</span
       >
       <button
         type="submit"
         class="create__btn"
-        :disabled="isSubmitting || isRequest"
+        :disabled="isSubmitting || isRequest !== ''"
         @click="clearErrAuth"
+        v-if="!request"
       >
         Добавить
       </button>
+      <button
+        type="submit"
+        class="create__btn"
+        :disabled="isSubmitting || isRequest !== ''"
+        @click="clearErrAuth"
+        v-else
+      >
+        Сохранить
+      </button>
     </div>
+    <hr>
+    <button v-if="request" class="create__btn delete" type="button">Удалить</button>
   </form>
 </template>
 
@@ -125,7 +138,10 @@ import { computed } from 'vue'
 export default {
   components: { AppControl, AppSelect },
   emits: ['offModal'],
-  setup(_, { emit }) {
+  props: {
+    request: Object
+  },
+  setup(props, { emit }) {
     const successStore = useSuccessStore()
     const requestStore = useRequestStore()
     const isRequest = computed(() => successStore.getSuccess)
@@ -135,22 +151,17 @@ export default {
       setTimeout(() => {
         emit('offModal')
       }, 1000)
-      if (isRequest) {
-        title.value = ''
-        author.value = ''
-        genre.value = ''
-        publisher.value = ''
-        cover.value = ''
-        pages.value = ''
-        circulation.value = ''
-        year.value = ''
-        price.value = ''
-        amount.value = ''
-        img.value = ''
-      }
     }
+
+    const update = async (values) => {
+      await requestStore.updateBook(values)
+      setTimeout(() => {
+        emit('offModal')
+      }, 1000)
+    }
+
     return {
-      ...useCreateForm(submit),
+      ...useCreateForm(submit, props.request, update),
       isRequest,
     }
   },

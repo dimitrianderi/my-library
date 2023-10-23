@@ -3,7 +3,7 @@ import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { computed, ref, watch } from 'vue'
 
-export function useCreateForm(fn) {
+export function useCreateForm(fnCreate, request, fnUpdate) {
     const { handleSubmit, isSubmitting, submitCount } = useForm()
 
     const isErrorName = ref(false)
@@ -34,6 +34,22 @@ export function useCreateForm(fn) {
     const { value: price, errorMessage: errorPrice } = useField('price', yup.string().trim().required('Введите стоимость книги'))
     const { value: amount, errorMessage: errorAmount } = useField('amount', yup.string().trim().required('Введите количетсво экземпляров'))
     const { value: img, errorMessage: errorImg } = useField('img', yup.string().trim().required('Введите url к изображению'))
+    const { value: id } = useField('id')
+
+    if (request) {
+        title.value = request.title
+        author.value = request.author
+        genre.value = request.genre
+        publisher.value = request.publisher
+        cover.value = request.cover
+        pages.value = request.pages
+        circulation.value = request.circulation
+        year.value = request.year
+        price.value = request.price
+        amount.value = request.amount
+        img.value = request.img
+        id.value = request.id
+      }
 
     const genre_arr = [
         { name: 'Классика', value: 'classic' },
@@ -53,7 +69,7 @@ export function useCreateForm(fn) {
         { name: 'Аст', value: 'ast' },
     ]
 
-    const onSubmit = handleSubmit(fn) 
+    const onSubmit = handleSubmit(request ? fnUpdate : fnCreate) 
 
     watch(submitCount, (newValue) => {
         if (newValue > 0) {

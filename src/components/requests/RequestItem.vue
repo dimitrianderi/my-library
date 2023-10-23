@@ -15,24 +15,46 @@
             <span class="book__text">год: <span class="book__desc">{{ request.year }}</span></span>
             <span class="book__text">Штук: <span class="book__text">{{ request.amount }}</span> шт.</span>
             <span class="book__price">{{ request.price }} руб.</span>
-            <div class="book__btn">Изменить</div>
+            <div class="book__btn" @click="onModal">Изменить</div>
         </div>
     </div>
+    <teleport to="body">
+        <app-modal v-if="modal" @offModal="offModal" title="Редактировать книгу">
+            <request-create @offModal="offModal" :request="request"></request-create>
+        </app-modal>
+    </teleport>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { publishers } from '@/utils/publishers.js'
 import { covers } from '@/utils/covers.js'
 import { genres } from '@/utils/genres.js'
+import AppModal from '@/components/ui/AppModal.vue'
+import RequestCreate from './RequestCreate.vue'
+import { useSuccessStore } from '../../stores/SuccessStore'
 export default {
+  components: { AppModal, RequestCreate },
     props: {
         request: Object
     },
     setup () {
+        const modal = ref(false)
+        const successStore = useSuccessStore()
+
+        const onModal = () => modal.value = true
+        const offModal = () => {
+            modal.value = false
+            successStore.updateSuccess('')
+        }
+
         return {
             publishers,
             covers,
-            genres
+            genres,
+            modal,
+            onModal,
+            offModal
         }
     }
 }

@@ -26,6 +26,22 @@
   }
 }
 
+::-webkit-search-decoration,
+::-webkit-search-cancel-button,
+::-webkit-search-results-button,
+::-webkit-search-results-decoration {
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: none;
+  margin-right: 10px;
+  color: $brown;
+  background: transparent;
+  font-size: 40px;
+  background: url($close);
+  background-size: 100%;
+  cursor: pointer;
+}
+
 @mixin search_block($width) {
   width: $width;
   height: 80px;
@@ -97,22 +113,6 @@
   &:focus {
     width: 280px;
     background: $input-shadow;
-  }
-
-  &::-webkit-search-decoration,
-  &::-webkit-search-cancel-button,
-  &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration {
-    width: 20px;
-    height: 20px;
-    -webkit-appearance: none;
-    margin-right: 10px;
-    color: $brown;
-    background: transparent;
-    font-size: 40px;
-    background: url($close);
-    background-size: 100%;
-    cursor: pointer;
   }
 }
 

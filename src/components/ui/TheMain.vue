@@ -2,11 +2,6 @@
   <the-nav></the-nav>
   <div class="main__title">
     <span>Список ваших книг</span>
-    <teleport to="body">
-      <app-modal v-if="modal" @offModal="offModal" title="Добавить книгу">
-        <request-create @offModal="offModal"></request-create>
-      </app-modal>
-    </teleport>
     <span class="cross" @click="onModal"></span>
   </div>
   <main class="main">
@@ -15,6 +10,11 @@
       <request-items :requests="requests" v-else></request-items>
     </div>
   </main>
+  <teleport to="body">
+    <app-modal v-if="modal" @offModal="offModal" title="Добавить книгу">
+      <request-create @offModal="offModal"></request-create>
+    </app-modal>
+  </teleport>
 </template>
 
 <script>
@@ -24,7 +24,7 @@ import { useSuccessStore } from '@/stores/SuccessStore'
 import { useRequestStore } from '@/stores/RequestStore'
 import AppModal from '@/components/ui/AppModal.vue'
 import RequestCreate from '@/components/requests/RequestCreate.vue'
-import RequestItems from '../requests/RequestItems.vue'
+import RequestItems from '@/components/requests/RequestItems.vue'
 import AppLoader from './AppLoader.vue'
 import TheNav from './TheNav.vue'
 export default {
@@ -48,7 +48,7 @@ export default {
 
     const offModal = () => {
       modal.value = false
-      successStore.updateSuccess(null)
+      successStore.updateSuccess('')
     }
 
     onMounted(async () => {

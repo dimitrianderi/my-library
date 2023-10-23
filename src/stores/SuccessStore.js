@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 export const useSuccessStore = defineStore('SuccessStore', () => {
-    const isSuccess = ref(null)
+    const isSuccess = ref('')
 
     const getSuccess = computed(() => isSuccess.value)
 

@@ -27,10 +27,18 @@
 
   margin: 10px 0;
   align-self: center;
+
+  &.delete {
+    background-color: $dark-scarlet;
+    color: $dark;
+    text-shadow: 0 0 5px $brown;
+    box-shadow: 0 0 0 $brown;
+    border-color: $brown;
+  }
 }
 
 .create__select {
-    @include select;
+  @include select;
 }
 
 .controls {
