@@ -6,7 +6,8 @@ import { error } from "@/utils/errors";
 const TOKEN_KEY = 'token'
 const USER = 'user'
 const KEY = import.meta.env.VITE_AUTH_KEY
-const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${KEY}`
+const URL_AUTH = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${KEY}`
+const URL_REG = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${KEY}`
 
 export const useAuthStore = defineStore('authStore', () => {
     const filterStore = useFilterStore()
@@ -33,9 +34,20 @@ export const useAuthStore = defineStore('authStore', () => {
 
     const login = async (payload) => {
         try {
-            const { data } = await axios.post(URL, { ...payload, returnSecureToken: true })
+            const { data } = await axios.post(URL_AUTH, { ...payload, returnSecureToken: true })
             setToken(data.idToken)
             setEmail(data.email)
+        } catch (err) {
+            setErrAuth(error(err.response.data.error.message))
+            throw new Error()
+        }
+    }
+
+    const reg = async (payload) => {
+        try {
+            const {data} = await axios.post(URL_REG, { ...payload, returnSecureToken: true })
+            console.log(data)
+            await login({ email: payload.email, password: payload.password })
         } catch (err) {
             setErrAuth(error(err.response.data.error.message))
             throw new Error()
@@ -53,6 +65,7 @@ export const useAuthStore = defineStore('authStore', () => {
         login,
         logout,
         clearErrAuth,
-        getUser
+        getUser,
+        reg
     }
 })

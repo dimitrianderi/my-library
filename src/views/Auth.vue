@@ -1,28 +1,24 @@
 <template>
   <form class="auth__modal" @submit.prevent="onSubmit">
     <h2 class="auth__title">Авторизация</h2>
-    <div class="auth__form-control">
-      <label class="auth__label" for="email">Почта:</label>
-      <input
-        :class="['auth__input', { error: errorEmail }]"
+    <app-control
+        name="auth"
         type="email"
+        label="Почта"
+        :error="errorEmail"
         id="email"
         v-model="email"
         autocomplete="on"
-      />
-    </div>
-    <small class="auth__errorText">{{ errorEmail }}</small>
-    <div class="auth__form-control">
-      <label class="auth__label" for="pass">Пароль:</label>
-      <input
-        :class="['auth__input', { error: errorPass }]"
+      ></app-control>
+    <app-control
+        name="auth"
         type="password"
+        label="Пароль"
+        :error="errorPass"
         id="pass"
         v-model="pass"
-        autocomplete="off"
-      />
-    </div>
-    <small class="auth__errorText">{{ errorPass }}</small>
+        autocomplete="on"
+      ></app-control>
     <button
       type="submit"
       class="auth__btn"
@@ -37,13 +33,16 @@
 
 <script>
 import { useLoginForm } from '@/use/useLoginForm'
+import AppControl from '@/components/form/AppControl.vue'
 
 export default {
+  components: { AppControl },
   setup() {
     return {
       ...useLoginForm(),
     }
   },
+  name: 'Auth',
 }
 </script>
 

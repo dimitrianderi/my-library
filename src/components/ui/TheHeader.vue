@@ -3,7 +3,7 @@
     <h1>Моя библиотека</h1>
     <div class="header"></div>
   </header>
-  <div class="title">
+  <div class="header__title">
     <span class="header__user">Здравствуйте, {{ user }}!</span>
     <span class="header__text" @click="logout">Выйти</span>
   </div>
@@ -33,30 +33,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/index.scss';
-.title {
-  @include title(end, 90%, $dark);
-  margin: 0 auto;
-  border-radius: 15px 15px 0 0;
-  text-shadow: 0 0 5px $gold;
-  display: flex;
-  justify-content: space-between;
-
-  & .header__text {
-    transition: all 0.5s ease;
-
-    &:hover {
-      color: $gold;
-      text-shadow: 0 0 10px $white;
-      cursor: pointer;
-    }
-  }
-
-  & .header__user {
-    color: $white;
-    font-weight: 100;
-    text-shadow: none;
-  }
-}
-</style>
+<style></style>

@@ -1,5 +1,10 @@
 <template>
-  <h1>Auth Layout</h1>
+  <div class="auth__title">
+    <div class="auth__wrapper">
+      <router-link to="/auth" class="auth__text">Вход</router-link>
+      <router-link to="/reg" class="auth__text">Регистрация</router-link>
+    </div>
+  </div>
   <router-view></router-view>
 </template>
 

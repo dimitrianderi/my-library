@@ -20,6 +20,24 @@ const routes = [
             auth: false
         }
     },
+    {
+        path: '/reg',
+        name: 'Reg',
+        component: () => import('@/views/Registration.vue'),
+        meta: {
+            layout: 'auth',
+            auth: false
+        }
+    },
+    {
+        path: '/:CatchAll(.*)',
+        name: 'Auth',
+        component: () => import('@/views/Auth.vue'),
+        meta: {
+            layout: 'auth',
+            auth: false
+        }
+    },
 ]
 
 const router = createRouter({

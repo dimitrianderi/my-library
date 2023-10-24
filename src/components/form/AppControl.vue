@@ -5,7 +5,7 @@
       :class="[`${name}__input`, { error: error }]"
       :type="type"
       :id="id"
-      autocomplete="off"
+      :autocomplete="autocomplete"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       maxlength="80"
@@ -23,6 +23,10 @@ export default {
     label: String,
     error: String,
     modelValue: String,
+    autocomplete: {
+      type: String,
+      default: 'off'
+    }
   },
   emits: ['update:modelValue'],
 }
