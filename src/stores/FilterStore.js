@@ -90,8 +90,9 @@ export const useFilterStore = defineStore('filterStore', () => {
         genres.value = [];
         inputs.value = [];
         ranges.value = [];
-        sort.value = [];
+        sort.value = '';
         publishers.value = [];
+        covers.value = [];
         popular.value = false;
     }
 

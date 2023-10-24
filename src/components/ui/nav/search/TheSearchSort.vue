@@ -14,7 +14,7 @@
 <script>
 import { useFilterStore } from '@/stores/FilterStore'
 import AppInput from '@/components/form/AppInput.vue'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 export default {
   components: { AppInput },
@@ -26,10 +26,14 @@ export default {
       filterStore.addSort(newValue)
     })
 
+    onMounted(() => {
+      console.log(sort.value)
+    })
+
     watch(
       () => [filterStore.getSort],
-      ([sort]) => {
-        if (!sort) {
+      ([newValue]) => {
+        if (!newValue) {
           sort.value = ''
         }
       }

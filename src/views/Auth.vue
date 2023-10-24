@@ -17,7 +17,7 @@
       <input
         :class="['auth__input', { error: errorPass }]"
         type="password"
-        id="password"
+        id="pass"
         v-model="pass"
         autocomplete="off"
       />
