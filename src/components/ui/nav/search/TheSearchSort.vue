@@ -17,11 +17,10 @@ import AppInput from '@/components/form/AppInput.vue'
 import { onMounted, ref, watch } from 'vue'
 
 export default {
-  components: { AppInput },
   setup() {
     const filterStore = useFilterStore()
     const sort = ref(filterStore.getSort.length ? filterStore.getSort : '')
-
+    
     watch(sort, (newValue) => {
       filterStore.addSort(newValue)
     })
@@ -29,7 +28,7 @@ export default {
     onMounted(() => {
       console.log(sort.value)
     })
-
+    
     watch(
       () => [filterStore.getSort],
       ([newValue]) => {
@@ -37,12 +36,13 @@ export default {
           sort.value = ''
         }
       }
-    )
-
-    return {
-      sort,
-    }
-  },
+      )
+      
+      return {
+        sort,
+      }
+    },
+    components: { AppInput },
 }
 </script>
 

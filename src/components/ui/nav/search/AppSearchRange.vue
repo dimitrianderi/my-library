@@ -39,6 +39,7 @@
 
 <script>
 import { computed } from 'vue'
+
 export default {
   emits: ['update:minValue', 'update:maxValue'],
   props: {

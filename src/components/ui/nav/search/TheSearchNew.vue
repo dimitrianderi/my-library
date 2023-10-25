@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import {useFilterStore} from '@/stores/FilterStore'
 
 export default {

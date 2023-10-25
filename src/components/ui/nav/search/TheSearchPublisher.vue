@@ -21,16 +21,15 @@
 </template>
 
 <script>
+import { ref, watch } from 'vue'
 import { useFilterStore } from '@/stores/filterStore'
 import { PUBLISHER_CODES } from '@/utils/publishers'
 import AppSearchLabel from '@/components/ui/nav/search/AppSearchLabel.vue'
 import AppCheckbox from '@/components/form/AppCheckbox.vue'
-import { ref, watch } from 'vue'
 export default {
-  components: { AppSearchLabel, AppCheckbox },
   setup() {
     const filterStore = useFilterStore()
-
+    
     const publishersStore = [
       {
         id: 'azbuka',
@@ -45,7 +44,7 @@ export default {
         value: ref(filterStore.getPublishers.includes('ast') || false),
       },
     ]
-
+    
     watch(
       () => [filterStore.getPublishers],
       ([newValue]) => {
@@ -55,21 +54,22 @@ export default {
           })
         }
       }
-    )
-
-    const togglePublisher = (publisher) => {
-      filterStore.getPublishers.includes(publisher)
+      )
+      
+      const togglePublisher = (publisher) => {
+        filterStore.getPublishers.includes(publisher)
         ? filterStore.delPublisher(publisher)
         : filterStore.addPublisher(publisher)
-    }
-
-    return {
-      PUBLISHER_CODES,
-      publishersStore,
-      togglePublisher,
-    }
-  },
-}
+      }
+      
+      return {
+        PUBLISHER_CODES,
+        publishersStore,
+        togglePublisher,
+      }
+    },
+    components: { AppSearchLabel, AppCheckbox },
+  }
 </script>
 
 <style></style>

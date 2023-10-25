@@ -22,16 +22,16 @@
 </template>
 
 <script>
+import { ref, watch } from 'vue'
 import { useFilterStore } from '@/stores/filterStore'
 import { COVER_CODES } from '@/utils/covers'
-import AppSearchLabel from './AppSearchLabel.vue'
-import AppCheckbox from '../../../form/AppCheckbox.vue'
-import { ref, watch } from 'vue'
+import AppSearchLabel from '@/components/ui/nav/search/AppSearchLabel.vue'
+import AppCheckbox from '@/components/form/AppCheckbox.vue'
+
 export default {
-  components: { AppSearchLabel, AppCheckbox },
   setup() {
     const filterStore = useFilterStore()
-
+    
     const coversStore = [
       {
         id: 'soft',
@@ -52,12 +52,12 @@ export default {
           })
         }
       }
-    )
-
-    const toggleCover = (cover) => {
+      )
+      
+      const toggleCover = (cover) => {
       filterStore.getCovers.includes(cover)
-        ? filterStore.delCover(cover)
-        : filterStore.addCover(cover)
+      ? filterStore.delCover(cover)
+      : filterStore.addCover(cover)
     }
 
     return {
@@ -66,6 +66,7 @@ export default {
       toggleCover
     }
   },
+  components: { AppSearchLabel, AppCheckbox },
 }
 </script>
 

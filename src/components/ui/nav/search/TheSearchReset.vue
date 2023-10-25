@@ -9,16 +9,16 @@ import { useFilterStore } from '@/stores/FilterStore'
 import AppInput from '@/components/form/AppInput.vue'
 
 export default {
-  components: { AppInput },
   setup() {
     const filterStore = useFilterStore()
-
+    
     const clearMenu = () => filterStore.clearFilters()
-
+    
     return {
       clearMenu,
     }
   },
+  components: { AppInput },
 }
 </script>
 

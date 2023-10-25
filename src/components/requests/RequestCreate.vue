@@ -136,15 +136,14 @@
 </template>
 
 <script>
-import AppControl from '@/components/form/AppControl.vue'
-import AppSelect from '@/components/form/AppSelect.vue'
-import { useCreateForm } from '@/use/useCreateForm'
+import { computed, ref } from 'vue'
 import { useRequestStore } from '@/stores/RequestStore'
 import { useSuccessStore } from '@/stores/SuccessStore'
-import { computed, ref } from 'vue'
+import { useCreateForm } from '@/use/useCreateForm'
+import AppControl from '@/components/form/AppControl.vue'
+import AppSelect from '@/components/form/AppSelect.vue'
 
 export default {
-  components: { AppControl, AppSelect },
   emits: ['offModal'],
   props: {
     request: Object,
@@ -154,21 +153,21 @@ export default {
     const requestStore = useRequestStore()
     const isRequest = computed(() => successStore.getSuccess)
     const isSubmit = ref(false)
-
+    
     const submit = async (values) => {
       await requestStore.createBook(values)
       setTimeout(() => {
         emit('offModal')
       }, 1000)
     }
-
+    
     const update = async (values) => {
       await requestStore.updateBook(values)
       setTimeout(() => {
         emit('offModal')
       }, 1000)
     }
-
+    
     const del = async (id) => {
       isSubmit.value = true
       try {
@@ -178,14 +177,15 @@ export default {
         isSubmit.value = false
       }
     }
-
+    
     return {
       ...useCreateForm(submit, props.request, update),
       isRequest,
-      del,
       isSubmit,
+      del,
     }
   },
+  components: { AppControl, AppSelect },
 }
 </script>
 

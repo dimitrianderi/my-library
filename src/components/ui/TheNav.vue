@@ -29,17 +29,34 @@ import AppGenre from '@/components/ui/nav/AppGenre.vue'
 import AppSearch from '@/components/ui/nav/AppSearch.vue'
 
 export default {
-  components: { AppCheckbox, AppGenre, AppSearch },
   setup() {
     const filterStore = useFilterStore()
 
     const genresStore = [
-      {id: 'classic', value: ref(filterStore.getGenres.includes('classic') || false)},
-      {id: 'history', value: ref(filterStore.getGenres.includes('history') || false)},
-      {id: 'philosophy', value: ref(filterStore.getGenres.includes('philosophy') || false)},
-      {id: 'poetry', value: ref(filterStore.getGenres.includes('poetry') || false)},
-      {id: 'fiction', value: ref(filterStore.getGenres.includes('fiction') || false)},
-      {id: 'adventure', value: ref(filterStore.getGenres.includes('adventure') || false)},
+      {
+        id: 'classic',
+        value: ref(filterStore.getGenres.includes('classic') || false),
+      },
+      {
+        id: 'history',
+        value: ref(filterStore.getGenres.includes('history') || false),
+      },
+      {
+        id: 'philosophy',
+        value: ref(filterStore.getGenres.includes('philosophy') || false),
+      },
+      {
+        id: 'poetry',
+        value: ref(filterStore.getGenres.includes('poetry') || false),
+      },
+      {
+        id: 'fiction',
+        value: ref(filterStore.getGenres.includes('fiction') || false),
+      },
+      {
+        id: 'adventure',
+        value: ref(filterStore.getGenres.includes('adventure') || false),
+      },
     ]
 
     watch(
@@ -65,6 +82,7 @@ export default {
       toggleGenre,
     }
   },
+  components: { AppCheckbox, AppGenre, AppSearch },
 }
 </script>
 

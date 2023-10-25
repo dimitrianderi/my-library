@@ -18,7 +18,6 @@ import { ref, watch } from 'vue'
 import { useFilterStore } from '@/stores/FilterStore'
 import AppSearchRange from '@/components/ui/nav/search/AppSearchRange.vue'
 export default {
-  components: { AppSearchRange },
   setup() {
     const filterStore = useFilterStore()
     const ranges = ref([
@@ -31,15 +30,15 @@ export default {
           filterStore.getRanges.price
             ? filterStore.getRanges.price.min.toString()
             : '0'
-        ),
-        maxValue: ref(
+            ),
+            maxValue: ref(
           filterStore.getRanges.price
-            ? filterStore.getRanges.price.max.toString()
-            : '4000'
-        ),
-      },
-      {
-        title: 'Количество страниц',
+          ? filterStore.getRanges.price.max.toString()
+          : '4000'
+          ),
+        },
+        {
+          title: 'Количество страниц',
         min: '0',
         max: '2000',
         step: '10',
@@ -47,15 +46,15 @@ export default {
           filterStore.getRanges.pages
             ? filterStore.getRanges.pages.min.toString()
             : '0'
-        ),
-        maxValue: ref(
-          filterStore.getRanges.pages
+            ),
+            maxValue: ref(
+              filterStore.getRanges.pages
             ? filterStore.getRanges.pages.max.toString()
             : '2000'
-        ),
+            ),
       },
     ])
-
+    
     watch(
       ranges,
       (newValue) => {
@@ -68,27 +67,28 @@ export default {
         filterStore.addRanges({price, pages})
       },
       { deep: true }
-    )
-
-    watch(
-      () => [filterStore.getRanges],
-      ([newValues]) => {
-        if (!newValues.price) {
-          ranges.value[0].minValue = '0'
-          ranges.value[0].maxValue = '4000'
-        }
+      )
+      
+      watch(
+        () => [filterStore.getRanges],
+        ([newValues]) => {
+          if (!newValues.price) {
+            ranges.value[0].minValue = '0'
+            ranges.value[0].maxValue = '4000'
+          }
         if (!newValues.pages) {
           ranges.value[1].minValue = '0'
           ranges.value[1].maxValue = '2000'
         }
       },
       { deep: true }
-    )
-
-    return {
-      ranges,
-    }
-  },
+      )
+      
+      return {
+        ranges,
+      }
+    },
+    components: { AppSearchRange },
 }
 </script>
 

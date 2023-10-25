@@ -19,14 +19,14 @@
 
 <script>
 import { onMounted, ref } from 'vue'
-import {useGetRequests} from '@/use/useGetRequests'
 import { useSuccessStore } from '@/stores/SuccessStore'
 import { useRequestStore } from '@/stores/RequestStore'
+import { useGetRequests } from '@/use/useGetRequests'
 import AppModal from '@/components/ui/AppModal.vue'
 import RequestCreate from '@/components/requests/RequestCreate.vue'
 import RequestItems from '@/components/requests/RequestItems.vue'
-import AppLoader from './AppLoader.vue'
-import TheNav from './TheNav.vue'
+import AppLoader from '@/components/ui/AppLoader.vue'
+import TheNav from '@/components/ui/TheNav.vue'
 export default {
   setup() {
     const successStore = useSuccessStore()
@@ -50,7 +50,7 @@ export default {
     })
 
     const requests = useGetRequests()
-
+    
     return {
       modal,
       onModal,

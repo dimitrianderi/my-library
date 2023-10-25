@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import { useFilterStore } from '@/stores/FilterStore'
 import { ref, watch } from 'vue'
-import AppSearchInput from './AppSearchInput.vue'
+import { useFilterStore } from '@/stores/FilterStore'
+import AppSearchInput from '@/ui/nav/search/AppSearchInput.vue'
+
 export default {
-  components: { AppSearchInput },
   setup() {
     const filterStore = useFilterStore()
-
+    
     const inputs = ref([
       {
         id: 'title',
@@ -36,25 +36,26 @@ export default {
     ])
 
     watch(inputs, (newValue) => {
-        const title = newValue[0].value
-        const author = newValue[1].value
-        const inputs = { title, author }
-        filterStore.addInputs(inputs)
-      },
-      { deep: true }
+      const title = newValue[0].value
+      const author = newValue[1].value
+      const inputs = { title, author }
+      filterStore.addInputs(inputs)
+    },
+    { deep: true }
     )
-
+    
     watch(() => [filterStore.getInputs['title'], filterStore.getInputs['author']],
-      ([title, author]) => {
-        inputs.value[0].value = title
-        inputs.value[1].value = author
-      }
+    ([title, author]) => {
+      inputs.value[0].value = title
+      inputs.value[1].value = author
+    }
     )
-
+    
     return {
       inputs,
     }
   },
+  components: { AppSearchInput },
 }
 </script>
 

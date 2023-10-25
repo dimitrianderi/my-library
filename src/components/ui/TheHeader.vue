@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import { useAuthStore } from '@/stores/AuthStore'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/AuthStore'
 
 export default {
   setup() {
