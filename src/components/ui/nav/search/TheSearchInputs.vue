@@ -14,7 +14,7 @@
 <script>
 import { ref, watch } from 'vue'
 import { useFilterStore } from '@/stores/FilterStore'
-import AppSearchInput from '@/ui/nav/search/AppSearchInput.vue'
+import AppSearchInput from '@/components/ui/nav/search/AppSearchInput.vue'
 
 export default {
   setup() {

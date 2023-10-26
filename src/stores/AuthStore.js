@@ -46,7 +46,6 @@ export const useAuthStore = defineStore('authStore', () => {
     const reg = async (payload) => {
         try {
             const {data} = await axios.post(URL_REG, { ...payload, returnSecureToken: true })
-            console.log(data)
             await login({ email: payload.email, password: payload.password })
         } catch (err) {
             setErrAuth(error(err.response.data.error.message))

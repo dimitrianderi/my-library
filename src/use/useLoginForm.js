@@ -4,14 +4,16 @@ import * as yup from 'yup'
 import { useAuthStore } from '../stores/AuthStore'
 import { useRouter } from 'vue-router'
 
-export function useLoginForm() {
+export function useLoginForm(currentRouter) {
     const router = useRouter()
     const { handleSubmit, isSubmitting, submitCount } = useForm()
     const authStore = useAuthStore()
     const MIN_PASS = 6
+    const MAX_NAME = 12
     const isErrorEmail = ref(false)
     const isErrorPass = ref(false)
-    const isErrAuth = computed(() => authStore.getErrAuth);
+    const isErrorName = ref(false)
+    const isErrAuth = computed(() => authStore.getErrAuth)
 
     const { value: email, errorMessage: errorEmail } = useField(
         'email',
@@ -29,6 +31,7 @@ export function useLoginForm() {
             .required('заполните это поле')
             .min(MIN_PASS, `в пароле должно быть минимум ${MIN_PASS} символов`)
     )
+
 
     const onSubmit = handleSubmit(async (values) => {
         try {
@@ -60,6 +63,8 @@ export function useLoginForm() {
         errorEmail: computed(() => isErrorEmail.value ? (errorEmail.value || isErrAuth.value) : ''),
         pass,
         errorPass: computed(() => isErrorPass.value ? (errorPass.value || isErrAuth.value) : ''),
+        name,
+        errorName: computed(() => isErrorName.value ? (errorName.value || isErrAuth.value) : ''),
         isSubmitting,
         onSubmit,
         clearErrAuth
