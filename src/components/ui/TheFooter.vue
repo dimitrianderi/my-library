@@ -4,7 +4,7 @@
       <span class="footer__text">2023</span>
       <a
         class="footer__text github"
-        href="https://github.com/dimitrianderi"
+        href="https://github.com/dimitrianderi/my-library.git"
         target="_blank"
         >Д. Харитонов</a
       >
