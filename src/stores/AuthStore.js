@@ -1,6 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 import { useFilterStore } from "@/stores/FilterStore";
+import { useRequestStore } from "@/stores/RequestStore";
 import { computed, ref, watch } from "vue";
 import { error } from "@/utils/errors";
 const TOKEN_KEY = 'token'
@@ -11,6 +12,7 @@ const URL_REG = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$
 
 export const useAuthStore = defineStore('authStore', () => {
     const filterStore = useFilterStore()
+    const requestStore = useRequestStore()
 
     const token = ref(localStorage.getItem(TOKEN_KEY))
     const user = ref(localStorage.getItem(USER))
@@ -30,6 +32,7 @@ export const useAuthStore = defineStore('authStore', () => {
         token.value = null
         user.value = null
         filterStore.clearFilters()
+        requestStore.delBooks()
     }
 
     const login = async (payload) => {
@@ -45,7 +48,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
     const reg = async (payload) => {
         try {
-            const {data} = await axios.post(URL_REG, { ...payload, returnSecureToken: true })
+            await axios.post(URL_REG, { ...payload, returnSecureToken: true })
             await login({ email: payload.email, password: payload.password })
         } catch (err) {
             setErrAuth(error(err.response.data.error.message))

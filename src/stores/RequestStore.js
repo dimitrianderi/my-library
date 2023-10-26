@@ -12,6 +12,7 @@ export const useRequestStore = defineStore("RequestStore", () => {
     const getBooks = computed(() => books.value)
     const setBooks = (requests) => books.value = requests
 
+    const delBooks = () => books.value = []
 
     const addBook = (book) => books.value.push(book)
 
@@ -88,6 +89,7 @@ export const useRequestStore = defineStore("RequestStore", () => {
 
     return {
         getBooks,
+        delBooks,
         createBook,
         updateBook,
         deleteBook,
